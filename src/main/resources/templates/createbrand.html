@@ -10,230 +10,230 @@
     <link rel="stylesheet" th:href="@{/css/brand.css}">
 </head>
 <body>
-    <div layout:fragment="content" class="brand-registration-container">
-        <div class="container">
-            <div class="registration-header">
-                <h1 class="page-title" data-ko="농장&와인 사업자 등록" data-en="Farm & Wine Business Registration" data-pt="Registro de Negócios Agrícolas e Vinícolas">농장&와인 사업자 등록</h1>
-                <p class="page-subtitle" data-ko="Portoria와 함께 성장하세요. 귀하의 농장과 와인 사업을 등록하고 새로운 기회를 발견하세요." data-en="Grow with Portoria. Register your farm and wine business and discover new opportunities." data-pt="Cresça com Portoria. Registre seu negócio agrícola e vinícola e descubra novas oportunidades.">Portoria와 함께 성장하세요. 귀하의 농장과 와인 사업을 등록하고 새로운 기회를 발견하세요.</p>
-            </div>
+<div layout:fragment="content" class="brand-registration-container">
+    <div class="container">
+        <div class="registration-header">
+            <h1 class="page-title" data-ko="농장&와인 사업자 등록" data-en="Farm & Wine Business Registration" data-pt="Registro de Negócios Agrícolas e Vinícolas">농장&와인 사업자 등록</h1>
+            <p class="page-subtitle" data-ko="Portoria와 함께 성장하세요. 귀하의 농장과 와인 사업을 등록하고 새로운 기회를 발견하세요." data-en="Grow with Portoria. Register your farm and wine business and discover new opportunities." data-pt="Cresça com Portoria. Registre seu negócio agrícola e vinícola e descubra novas oportunidades.">Portoria와 함께 성장하세요. 귀하의 농장과 와인 사업을 등록하고 새로운 기회를 발견하세요.</p>
+        </div>
 
-            <div class="registration-form-container">
-                <form class="registration-form" th:action="@{/brand/register}" method="post">
-                    <div class="form-section">
-                        <h2 class="section-title" data-ko="사업자 정보" data-en="Business Information" data-pt="Informações do Negócio">사업자 정보</h2>
-                        
-                        <div class="form-group">
-                            <label for="businessName" class="form-label" data-ko="사업주 이름" data-en="Business Owner Name" data-pt="Nome do Proprietário do Negócio">사업주 이름</label>
-                            <input type="text" id="businessName" name="businessName" class="form-input" required 
-                                   data-ko-placeholder="사업주 이름을 입력해주세요" 
-                                   data-en-placeholder="Enter business owner name" 
-                                   data-pt-placeholder="Digite o nome do proprietário do negócio">
-                        </div>
+        <div class="registration-form-container">
+            <form class="registration-form" th:action="@{/brand/register}" method="post">
+                <div class="form-section">
+                    <h2 class="section-title" data-ko="사업자 정보" data-en="Business Information" data-pt="Informações do Negócio">사업자 정보</h2>
 
-                        <div class="form-group">
-                            <label for="businessNumber" class="form-label" data-ko="사업자등록번호" data-en="Business Registration Number" data-pt="Número de Registro do Negócio">사업자등록번호</label>
-                            <input type="text" id="businessNumber" name="businessNumber" class="form-input" required 
-                                   data-ko-placeholder="사업자등록번호를 입력해주세요 (예: 123-45-67890)" 
-                                   data-en-placeholder="Enter business registration number (e.g., 123-45-67890)" 
-                                   data-pt-placeholder="Digite o número de registro do negócio (ex: 123-45-67890)">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="countryCode" class="form-label" data-ko="국가번호" data-en="Country Code" data-pt="Código do País">국가번호</label>
-                            <select id="countryCode" name="countryCode" class="form-select" required>
-                                <option value="" data-ko="국가를 선택해주세요" data-en="Select Country" data-pt="Selecione o País">국가를 선택해주세요</option>
-                                
-                                <!-- 아시아 -->
-                                <option value="+82" data-ko="대한민국 (+82)" data-en="South Korea (+82)" data-pt="Coreia do Sul (+82)">대한민국 (+82)</option>
-                                <option value="+81" data-ko="일본 (+81)" data-en="Japan (+81)" data-pt="Japão (+81)">일본 (+81)</option>
-                                <option value="+86" data-ko="중국 (+86)" data-en="China (+86)" data-pt="China (+86)">중국 (+86)</option>
-                                
-                                <!-- 북미 -->
-                                <option value="+1" data-ko="미국 (+1)" data-en="United States (+1)" data-pt="Estados Unidos (+1)">미국 (+1)</option>
-                                <option value="+1" data-ko="캐나다 (+1)" data-en="Canada (+1)" data-pt="Canadá (+1)">캐나다 (+1)</option>
-                                
-                                <!-- 남미 -->
-                                <option value="+55" data-ko="브라질 (+55)" data-en="Brazil (+55)" data-pt="Brasil (+55)">브라질 (+55)</option>
-                                <option value="+54" data-ko="아르헨티나 (+54)" data-en="Argentina (+54)" data-pt="Argentina (+54)">아르헨티나 (+54)</option>
-                                <option value="+56" data-ko="칠레 (+56)" data-en="Chile (+56)" data-pt="Chile (+56)">칠레 (+56)</option>
-                                
-                                <!-- 유럽 -->
-                                <option value="+33" data-ko="프랑스 (+33)" data-en="France (+33)" data-pt="França (+33)">프랑스 (+33)</option>
-                                <option value="+39" data-ko="이탈리아 (+39)" data-en="Italy (+39)" data-pt="Itália (+39)">이탈리아 (+39)</option>
-                                <option value="+34" data-ko="스페인 (+34)" data-en="Spain (+34)" data-pt="Espanha (+34)">스페인 (+34)</option>
-                                <option value="+351" data-ko="포르투갈 (+351)" data-en="Portugal (+351)" data-pt="Portugal (+351)">포르투갈 (+351)</option>
-                                <option value="+420" data-ko="체코 (+420)" data-en="Czech Republic (+420)" data-pt="República Tcheca (+420)">체코 (+420)</option>
-                                <option value="+995" data-ko="조지아 (+995)" data-en="Georgia (+995)" data-pt="Geórgia (+995)">조지아 (+995)</option>
-                                <option value="+379" data-ko="교황청 (+379)" data-en="Vatican City (+379)" data-pt="Cidade do Vaticano (+379)">교황청 (+379)</option>
-                                <option value="+381" data-ko="세르비아 (+381)" data-en="Serbia (+381)" data-pt="Sérvia (+381)">세르비아 (+381)</option>
-                                <option value="+49" data-ko="독일 (+49)" data-en="Germany (+49)" data-pt="Alemanha (+49)">독일 (+49)</option>
-                                <option value="+44" data-ko="영국 (+44)" data-en="United Kingdom (+44)" data-pt="Reino Unido (+44)">영국 (+44)</option>
-                                <option value="+31" data-ko="네덜란드 (+31)" data-en="Netherlands (+31)" data-pt="Holanda (+31)">네덜란드 (+31)</option>
-                                <option value="+32" data-ko="벨기에 (+32)" data-en="Belgium (+32)" data-pt="Bélgica (+32)">벨기에 (+32)</option>
-                                <option value="+41" data-ko="스위스 (+41)" data-en="Switzerland (+41)" data-pt="Suíça (+41)">스위스 (+41)</option>
-                                <option value="+43" data-ko="오스트리아 (+43)" data-en="Austria (+43)" data-pt="Áustria (+43)">오스트리아 (+43)</option>
-                                <option value="+45" data-ko="덴마크 (+45)" data-en="Denmark (+45)" data-pt="Dinamarca (+45)">덴마크 (+45)</option>
-                                <option value="+46" data-ko="스웨덴 (+46)" data-en="Sweden (+46)" data-pt="Suécia (+46)">스웨덴 (+46)</option>
-                                <option value="+47" data-ko="노르웨이 (+47)" data-en="Norway (+47)" data-pt="Noruega (+47)">노르웨이 (+47)</option>
-                                <option value="+358" data-ko="핀란드 (+358)" data-en="Finland (+358)" data-pt="Finlândia (+358)">핀란드 (+358)</option>
-                                <option value="+48" data-ko="폴란드 (+48)" data-en="Poland (+48)" data-pt="Polônia (+48)">폴란드 (+48)</option>
-                                <option value="+36" data-ko="헝가리 (+36)" data-en="Hungary (+36)" data-pt="Hungria (+36)">헝가리 (+36)</option>
-                                <option value="+40" data-ko="루마니아 (+40)" data-en="Romania (+40)" data-pt="Romênia (+40)">루마니아 (+40)</option>
-                                <option value="+359" data-ko="불가리아 (+359)" data-en="Bulgaria (+359)" data-pt="Bulgária (+359)">불가리아 (+359)</option>
-                                <option value="+385" data-ko="크로아티아 (+385)" data-en="Croatia (+385)" data-pt="Croácia (+385)">크로아티아 (+385)</option>
-                                <option value="+386" data-ko="슬로베니아 (+386)" data-en="Slovenia (+386)" data-pt="Eslovênia (+386)">슬로베니아 (+386)</option>
-                                <option value="+421" data-ko="슬로바키아 (+421)" data-en="Slovakia (+421)" data-pt="Eslováquia (+421)">슬로바키아 (+421)</option>
-                                <option value="+30" data-ko="그리스 (+30)" data-en="Greece (+30)" data-pt="Grécia (+30)">그리스 (+30)</option>
-                                <option value="+90" data-ko="터키 (+90)" data-en="Turkey (+90)" data-pt="Turquia (+90)">터키 (+90)</option>
-                                <option value="+7" data-ko="러시아 (+7)" data-en="Russia (+7)" data-pt="Rússia (+7)">러시아 (+7)</option>
-                                <option value="+380" data-ko="우크라이나 (+380)" data-en="Ukraine (+380)" data-pt="Ucrânia (+380)">우크라이나 (+380)</option>
-                                <option value="+375" data-ko="벨라루스 (+375)" data-en="Belarus (+375)" data-pt="Bielorrússia (+375)">벨라루스 (+375)</option>
-                                <option value="+370" data-ko="리투아니아 (+370)" data-en="Lithuania (+370)" data-pt="Lituânia (+370)">리투아니아 (+370)</option>
-                                <option value="+371" data-ko="라트비아 (+371)" data-en="Latvia (+371)" data-pt="Letônia (+371)">라트비아 (+371)</option>
-                                <option value="+372" data-ko="에스토니아 (+372)" data-en="Estonia (+372)" data-pt="Estônia (+372)">에스토니아 (+372)</option>
-                                <option value="+353" data-ko="아일랜드 (+353)" data-en="Ireland (+353)" data-pt="Irlanda (+353)">아일랜드 (+353)</option>
-                                <option value="+354" data-ko="아이슬란드 (+354)" data-en="Iceland (+354)" data-pt="Islândia (+354)">아이슬란드 (+354)</option>
-                                <option value="+352" data-ko="룩셈부르크 (+352)" data-en="Luxembourg (+352)" data-pt="Luxemburgo (+352)">룩셈부르크 (+352)</option>
-                                <option value="+377" data-ko="모나코 (+377)" data-en="Monaco (+377)" data-pt="Mônaco (+377)">모나코 (+377)</option>
-                                <option value="+376" data-ko="안도라 (+376)" data-en="Andorra (+376)" data-pt="Andorra (+376)">안도라 (+376)</option>
-                                <option value="+378" data-ko="산마리노 (+378)" data-en="San Marino (+378)" data-pt="San Marino (+378)">산마리노 (+378)</option>
-                                <option value="+423" data-ko="리히텐슈타인 (+423)" data-en="Liechtenstein (+423)" data-pt="Liechtenstein (+423)">리히텐슈타인 (+423)</option>
-                                <option value="+389" data-ko="북마케도니아 (+389)" data-en="North Macedonia (+389)" data-pt="Macedônia do Norte (+389)">북마케도니아 (+389)</option>
-                                <option value="+382" data-ko="몬테네그로 (+382)" data-en="Montenegro (+382)" data-pt="Montenegro (+382)">몬테네그로 (+382)</option>
-                                <option value="+387" data-ko="보스니아 헤르체고비나 (+387)" data-en="Bosnia and Herzegovina (+387)" data-pt="Bósnia e Herzegovina (+387)">보스니아 헤르체고비나 (+387)</option>
-                                <option value="+383" data-ko="코소보 (+383)" data-en="Kosovo (+383)" data-pt="Kosovo (+383)">코소보 (+383)</option>
-                                <option value="+355" data-ko="알바니아 (+355)" data-en="Albania (+355)" data-pt="Albânia (+355)">알바니아 (+355)</option>
-                                <option value="+356" data-ko="몰타 (+356)" data-en="Malta (+356)" data-pt="Malta (+356)">몰타 (+356)</option>
-                                <option value="+357" data-ko="키프로스 (+357)" data-en="Cyprus (+357)" data-pt="Chipre (+357)">키프로스 (+357)</option>
-                                
-                                <!-- 오세아니아 -->
-                                <option value="+61" data-ko="호주 (+61)" data-en="Australia (+61)" data-pt="Austrália (+61)">호주 (+61)</option>
-                                <option value="+64" data-ko="뉴질랜드 (+64)" data-en="New Zealand (+64)" data-pt="Nova Zelândia (+64)">뉴질랜드 (+64)</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phoneNumber" class="form-label" data-ko="연락처" data-en="Contact Number" data-pt="Número de Contato">연락처</label>
-                            <input type="tel" id="phoneNumber" name="phoneNumber" class="form-input" required 
-                                   data-ko-placeholder="연락처를 입력해주세요" 
-                                   data-en-placeholder="Enter contact number" 
-                                   data-pt-placeholder="Digite o número de contato">
-                        </div>
+                    <div class="form-group">
+                        <label for="businessName" class="form-label" data-ko="사업주 이름" data-en="Business Owner Name" data-pt="Nome do Proprietário do Negócio">사업주 이름</label>
+                        <input type="text" id="businessName" name="businessName" class="form-input" required
+                               data-ko-placeholder="사업주 이름을 입력해주세요"
+                               data-en-placeholder="Enter business owner name"
+                               data-pt-placeholder="Digite o nome do proprietário do negócio">
                     </div>
 
-                    <div class="form-section">
-                        <h2 class="section-title" data-ko="문의 내용" data-en="Inquiry Details" data-pt="Detalhes da Consulta">문의 내용</h2>
-                        
-                        <div class="form-group">
-                            <label for="inquiryContent" class="form-label" data-ko="문의 내용" data-en="Inquiry Content" data-pt="Conteúdo da Consulta">문의 내용</label>
-                            <textarea id="inquiryContent" name="inquiryContent" class="form-textarea" rows="8" required 
-                                      data-ko-placeholder="농장이나 와인 사업에 대한 문의 내용을 자세히 작성해주세요.&#10;&#10;예시:&#10;- 농장 규모 및 위치&#10;- 재배 작물 또는 와인 종류&#10;- 사업 계획 및 목표&#10;- 협력 희망 사항&#10;- 기타 문의사항" 
-                                      data-en-placeholder="Please provide detailed information about your farm or wine business inquiry.&#10;&#10;Examples:&#10;- Farm size and location&#10;- Crops grown or wine types&#10;- Business plans and goals&#10;- Partnership interests&#10;- Other inquiries" 
-                                      data-pt-placeholder="Forneça informações detalhadas sobre sua consulta de negócio agrícola ou vinícola.&#10;&#10;Exemplos:&#10;- Tamanho e localização da fazenda&#10;- Culturas ou tipos de vinho&#10;- Planos e objetivos de negócio&#10;- Interesses de parceria&#10;- Outras consultas"></textarea>
-                        </div>
+                    <div class="form-group">
+                        <label for="businessNumber" class="form-label" data-ko="사업자등록번호" data-en="Business Registration Number" data-pt="Número de Registro do Negócio">사업자등록번호</label>
+                        <input type="text" id="businessNumber" name="businessNumber" class="form-input" required
+                               data-ko-placeholder="사업자등록번호를 입력해주세요 (예: 123-45-67890)"
+                               data-en-placeholder="Enter business registration number (e.g., 123-45-67890)"
+                               data-pt-placeholder="Digite o número de registro do negócio (ex: 123-45-67890)">
                     </div>
 
-                    <div class="form-actions">
-                        <button type="submit" class="submit-btn" data-ko="등록 신청하기" data-en="Submit Registration" data-pt="Enviar Registro">등록 신청하기</button>
+                    <div class="form-group">
+                        <label for="countryCode" class="form-label" data-ko="국가번호" data-en="Country Code" data-pt="Código do País">국가번호</label>
+                        <select id="countryCode" name="countryCode" class="form-select" required>
+                            <option value="" data-ko="국가를 선택해주세요" data-en="Select Country" data-pt="Selecione o País">국가를 선택해주세요</option>
+
+                            <!-- 아시아 -->
+                            <option value="+82" data-ko="대한민국 (+82)" data-en="South Korea (+82)" data-pt="Coreia do Sul (+82)">대한민국 (+82)</option>
+                            <option value="+81" data-ko="일본 (+81)" data-en="Japan (+81)" data-pt="Japão (+81)">일본 (+81)</option>
+                            <option value="+86" data-ko="중국 (+86)" data-en="China (+86)" data-pt="China (+86)">중국 (+86)</option>
+
+                            <!-- 북미 -->
+                            <option value="+1" data-ko="미국 (+1)" data-en="United States (+1)" data-pt="Estados Unidos (+1)">미국 (+1)</option>
+                            <option value="+1" data-ko="캐나다 (+1)" data-en="Canada (+1)" data-pt="Canadá (+1)">캐나다 (+1)</option>
+
+                            <!-- 남미 -->
+                            <option value="+55" data-ko="브라질 (+55)" data-en="Brazil (+55)" data-pt="Brasil (+55)">브라질 (+55)</option>
+                            <option value="+54" data-ko="아르헨티나 (+54)" data-en="Argentina (+54)" data-pt="Argentina (+54)">아르헨티나 (+54)</option>
+                            <option value="+56" data-ko="칠레 (+56)" data-en="Chile (+56)" data-pt="Chile (+56)">칠레 (+56)</option>
+
+                            <!-- 유럽 -->
+                            <option value="+33" data-ko="프랑스 (+33)" data-en="France (+33)" data-pt="França (+33)">프랑스 (+33)</option>
+                            <option value="+39" data-ko="이탈리아 (+39)" data-en="Italy (+39)" data-pt="Itália (+39)">이탈리아 (+39)</option>
+                            <option value="+34" data-ko="스페인 (+34)" data-en="Spain (+34)" data-pt="Espanha (+34)">스페인 (+34)</option>
+                            <option value="+351" data-ko="포르투갈 (+351)" data-en="Portugal (+351)" data-pt="Portugal (+351)">포르투갈 (+351)</option>
+                            <option value="+420" data-ko="체코 (+420)" data-en="Czech Republic (+420)" data-pt="República Tcheca (+420)">체코 (+420)</option>
+                            <option value="+995" data-ko="조지아 (+995)" data-en="Georgia (+995)" data-pt="Geórgia (+995)">조지아 (+995)</option>
+                            <option value="+379" data-ko="교황청 (+379)" data-en="Vatican City (+379)" data-pt="Cidade do Vaticano (+379)">교황청 (+379)</option>
+                            <option value="+381" data-ko="세르비아 (+381)" data-en="Serbia (+381)" data-pt="Sérvia (+381)">세르비아 (+381)</option>
+                            <option value="+49" data-ko="독일 (+49)" data-en="Germany (+49)" data-pt="Alemanha (+49)">독일 (+49)</option>
+                            <option value="+44" data-ko="영국 (+44)" data-en="United Kingdom (+44)" data-pt="Reino Unido (+44)">영국 (+44)</option>
+                            <option value="+31" data-ko="네덜란드 (+31)" data-en="Netherlands (+31)" data-pt="Holanda (+31)">네덜란드 (+31)</option>
+                            <option value="+32" data-ko="벨기에 (+32)" data-en="Belgium (+32)" data-pt="Bélgica (+32)">벨기에 (+32)</option>
+                            <option value="+41" data-ko="스위스 (+41)" data-en="Switzerland (+41)" data-pt="Suíça (+41)">스위스 (+41)</option>
+                            <option value="+43" data-ko="오스트리아 (+43)" data-en="Austria (+43)" data-pt="Áustria (+43)">오스트리아 (+43)</option>
+                            <option value="+45" data-ko="덴마크 (+45)" data-en="Denmark (+45)" data-pt="Dinamarca (+45)">덴마크 (+45)</option>
+                            <option value="+46" data-ko="스웨덴 (+46)" data-en="Sweden (+46)" data-pt="Suécia (+46)">스웨덴 (+46)</option>
+                            <option value="+47" data-ko="노르웨이 (+47)" data-en="Norway (+47)" data-pt="Noruega (+47)">노르웨이 (+47)</option>
+                            <option value="+358" data-ko="핀란드 (+358)" data-en="Finland (+358)" data-pt="Finlândia (+358)">핀란드 (+358)</option>
+                            <option value="+48" data-ko="폴란드 (+48)" data-en="Poland (+48)" data-pt="Polônia (+48)">폴란드 (+48)</option>
+                            <option value="+36" data-ko="헝가리 (+36)" data-en="Hungary (+36)" data-pt="Hungria (+36)">헝가리 (+36)</option>
+                            <option value="+40" data-ko="루마니아 (+40)" data-en="Romania (+40)" data-pt="Romênia (+40)">루마니아 (+40)</option>
+                            <option value="+359" data-ko="불가리아 (+359)" data-en="Bulgaria (+359)" data-pt="Bulgária (+359)">불가리아 (+359)</option>
+                            <option value="+385" data-ko="크로아티아 (+385)" data-en="Croatia (+385)" data-pt="Croácia (+385)">크로아티아 (+385)</option>
+                            <option value="+386" data-ko="슬로베니아 (+386)" data-en="Slovenia (+386)" data-pt="Eslovênia (+386)">슬로베니아 (+386)</option>
+                            <option value="+421" data-ko="슬로바키아 (+421)" data-en="Slovakia (+421)" data-pt="Eslováquia (+421)">슬로바키아 (+421)</option>
+                            <option value="+30" data-ko="그리스 (+30)" data-en="Greece (+30)" data-pt="Grécia (+30)">그리스 (+30)</option>
+                            <option value="+90" data-ko="터키 (+90)" data-en="Turkey (+90)" data-pt="Turquia (+90)">터키 (+90)</option>
+                            <option value="+7" data-ko="러시아 (+7)" data-en="Russia (+7)" data-pt="Rússia (+7)">러시아 (+7)</option>
+                            <option value="+380" data-ko="우크라이나 (+380)" data-en="Ukraine (+380)" data-pt="Ucrânia (+380)">우크라이나 (+380)</option>
+                            <option value="+375" data-ko="벨라루스 (+375)" data-en="Belarus (+375)" data-pt="Bielorrússia (+375)">벨라루스 (+375)</option>
+                            <option value="+370" data-ko="리투아니아 (+370)" data-en="Lithuania (+370)" data-pt="Lituânia (+370)">리투아니아 (+370)</option>
+                            <option value="+371" data-ko="라트비아 (+371)" data-en="Latvia (+371)" data-pt="Letônia (+371)">라트비아 (+371)</option>
+                            <option value="+372" data-ko="에스토니아 (+372)" data-en="Estonia (+372)" data-pt="Estônia (+372)">에스토니아 (+372)</option>
+                            <option value="+353" data-ko="아일랜드 (+353)" data-en="Ireland (+353)" data-pt="Irlanda (+353)">아일랜드 (+353)</option>
+                            <option value="+354" data-ko="아이슬란드 (+354)" data-en="Iceland (+354)" data-pt="Islândia (+354)">아이슬란드 (+354)</option>
+                            <option value="+352" data-ko="룩셈부르크 (+352)" data-en="Luxembourg (+352)" data-pt="Luxemburgo (+352)">룩셈부르크 (+352)</option>
+                            <option value="+377" data-ko="모나코 (+377)" data-en="Monaco (+377)" data-pt="Mônaco (+377)">모나코 (+377)</option>
+                            <option value="+376" data-ko="안도라 (+376)" data-en="Andorra (+376)" data-pt="Andorra (+376)">안도라 (+376)</option>
+                            <option value="+378" data-ko="산마리노 (+378)" data-en="San Marino (+378)" data-pt="San Marino (+378)">산마리노 (+378)</option>
+                            <option value="+423" data-ko="리히텐슈타인 (+423)" data-en="Liechtenstein (+423)" data-pt="Liechtenstein (+423)">리히텐슈타인 (+423)</option>
+                            <option value="+389" data-ko="북마케도니아 (+389)" data-en="North Macedonia (+389)" data-pt="Macedônia do Norte (+389)">북마케도니아 (+389)</option>
+                            <option value="+382" data-ko="몬테네그로 (+382)" data-en="Montenegro (+382)" data-pt="Montenegro (+382)">몬테네그로 (+382)</option>
+                            <option value="+387" data-ko="보스니아 헤르체고비나 (+387)" data-en="Bosnia and Herzegovina (+387)" data-pt="Bósnia e Herzegovina (+387)">보스니아 헤르체고비나 (+387)</option>
+                            <option value="+383" data-ko="코소보 (+383)" data-en="Kosovo (+383)" data-pt="Kosovo (+383)">코소보 (+383)</option>
+                            <option value="+355" data-ko="알바니아 (+355)" data-en="Albania (+355)" data-pt="Albânia (+355)">알바니아 (+355)</option>
+                            <option value="+356" data-ko="몰타 (+356)" data-en="Malta (+356)" data-pt="Malta (+356)">몰타 (+356)</option>
+                            <option value="+357" data-ko="키프로스 (+357)" data-en="Cyprus (+357)" data-pt="Chipre (+357)">키프로스 (+357)</option>
+
+                            <!-- 오세아니아 -->
+                            <option value="+61" data-ko="호주 (+61)" data-en="Australia (+61)" data-pt="Austrália (+61)">호주 (+61)</option>
+                            <option value="+64" data-ko="뉴질랜드 (+64)" data-en="New Zealand (+64)" data-pt="Nova Zelândia (+64)">뉴질랜드 (+64)</option>
+                        </select>
                     </div>
-                </form>
-            </div>
+
+                    <div class="form-group">
+                        <label for="phoneNumber" class="form-label" data-ko="연락처" data-en="Contact Number" data-pt="Número de Contato">연락처</label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" class="form-input" required
+                               data-ko-placeholder="연락처를 입력해주세요"
+                               data-en-placeholder="Enter contact number"
+                               data-pt-placeholder="Digite o número de contato">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title" data-ko="문의 내용" data-en="Inquiry Details" data-pt="Detalhes da Consulta">문의 내용</h2>
+
+                    <div class="form-group">
+                        <label for="inquiryContent" class="form-label" data-ko="문의 내용" data-en="Inquiry Content" data-pt="Conteúdo da Consulta">문의 내용</label>
+                        <textarea id="inquiryContent" name="inquiryContent" class="form-textarea" rows="8" required
+                                  data-ko-placeholder="농장이나 와인 사업에 대한 문의 내용을 자세히 작성해주세요.&#10;&#10;예시:&#10;- 농장 규모 및 위치&#10;- 재배 작물 또는 와인 종류&#10;- 사업 계획 및 목표&#10;- 협력 희망 사항&#10;- 기타 문의사항"
+                                  data-en-placeholder="Please provide detailed information about your farm or wine business inquiry.&#10;&#10;Examples:&#10;- Farm size and location&#10;- Crops grown or wine types&#10;- Business plans and goals&#10;- Partnership interests&#10;- Other inquiries"
+                                  data-pt-placeholder="Forneça informações detalhadas sobre sua consulta de negócio agrícola ou vinícola.&#10;&#10;Exemplos:&#10;- Tamanho e localização da fazenda&#10;- Culturas ou tipos de vinho&#10;- Planos e objetivos de negócio&#10;- Interesses de parceria&#10;- Outras consultas"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn" data-ko="등록 신청하기" data-en="Submit Registration" data-pt="Enviar Registro">등록 신청하기</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <!-- 언어 전환 JavaScript -->
-    <th:block layout:fragment="script">
-        <script>
-            // 언어 전환 기능
-            function updateFormLanguage(lang) {
-                // 모든 data-ko, data-en, data-pt 속성을 가진 요소들의 텍스트 변경
-                const elements = document.querySelectorAll('[data-ko][data-en][data-pt]');
-                elements.forEach(element => {
-                    const text = element.getAttribute(`data-${lang}`);
-                    if (text) {
-                        element.textContent = text;
-                    }
-                });
-
-                // placeholder 속성도 변경
-                const inputs = document.querySelectorAll('[data-ko-placeholder]');
-                inputs.forEach(input => {
-                    const placeholder = input.getAttribute(`data-${lang}-placeholder`);
-                    if (placeholder) {
-                        input.placeholder = placeholder;
-                    }
-                });
-            }
-
-            // 전역 언어 전환 함수 (헤더에서 호출)
-            function changeLanguage(lang) {
-                // 헤더의 언어 드롭다운 텍스트 변경
-                const languageDropdown = document.getElementById('languageDropdown');
-                if (languageDropdown) {
-                    if (lang === 'ko') {
-                        languageDropdown.textContent = '한국어';
-                    } else if (lang === 'en') {
-                        languageDropdown.textContent = 'English';
-                    } else if (lang === 'pt') {
-                        languageDropdown.textContent = 'Português';
-                    }
+<!-- 언어 전환 JavaScript -->
+<th:block layout:fragment="script">
+    <script>
+        // 언어 전환 기능
+        function updateFormLanguage(lang) {
+            // 모든 data-ko, data-en, data-pt 속성을 가진 요소들의 텍스트 변경
+            const elements = document.querySelectorAll('[data-ko][data-en][data-pt]');
+            elements.forEach(element => {
+                const text = element.getAttribute(`data-${lang}`);
+                if (text) {
+                    element.textContent = text;
                 }
+            });
 
-                // 폼 언어 업데이트
-                updateFormLanguage(lang);
-
-                // 로컬 스토리지에 언어 설정 저장
-                localStorage.setItem('selectedLanguage', lang);
-
-                // 드롭다운 메뉴 닫기
-                const dropdown = document.querySelector('.dropdown-menu[aria-labelledby="languageDropdown"]');
-                if (dropdown) {
-                    dropdown.classList.remove('show');
+            // placeholder 속성도 변경
+            const inputs = document.querySelectorAll('[data-ko-placeholder]');
+            inputs.forEach(input => {
+                const placeholder = input.getAttribute(`data-${lang}-placeholder`);
+                if (placeholder) {
+                    input.placeholder = placeholder;
                 }
-                const dropdownToggle = document.getElementById('languageDropdown');
-                if (dropdownToggle) {
-                    dropdownToggle.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        // 전역 언어 전환 함수 (헤더에서 호출)
+        function changeLanguage(lang) {
+            // 헤더의 언어 드롭다운 텍스트 변경
+            const languageDropdown = document.getElementById('languageDropdown');
+            if (languageDropdown) {
+                if (lang === 'ko') {
+                    languageDropdown.textContent = '한국어';
+                } else if (lang === 'en') {
+                    languageDropdown.textContent = 'English';
+                } else if (lang === 'pt') {
+                    languageDropdown.textContent = 'Português';
                 }
             }
 
-            // 페이지 로드 시 저장된 언어 설정 불러오기
-            document.addEventListener('DOMContentLoaded', function() {
-                const savedLanguage = localStorage.getItem('selectedLanguage');
-                if (savedLanguage && savedLanguage !== 'ko') {
-                    changeLanguage(savedLanguage);
-                }
-            });
+            // 폼 언어 업데이트
+            updateFormLanguage(lang);
 
-            // 언어 변경 이벤트 리스너 (다른 페이지에서 언어가 변경될 때)
-            window.addEventListener('storage', function(e) {
-                if (e.key === 'selectedLanguage') {
-                    changeLanguage(e.newValue);
-                }
-            });
+            // 로컬 스토리지에 언어 설정 저장
+            localStorage.setItem('selectedLanguage', lang);
 
-            // 폼 제출 시 유효성 검사
-            document.querySelector('.registration-form').addEventListener('submit', function(e) {
-                const businessName = document.getElementById('businessName').value.trim();
-                const businessNumber = document.getElementById('businessNumber').value.trim();
-                const countryCode = document.getElementById('countryCode').value;
-                const phoneNumber = document.getElementById('phoneNumber').value.trim();
-                const inquiryContent = document.getElementById('inquiryContent').value.trim();
+            // 드롭다운 메뉴 닫기
+            const dropdown = document.querySelector('.dropdown-menu[aria-labelledby="languageDropdown"]');
+            if (dropdown) {
+                dropdown.classList.remove('show');
+            }
+            const dropdownToggle = document.getElementById('languageDropdown');
+            if (dropdownToggle) {
+                dropdownToggle.setAttribute('aria-expanded', 'false');
+            }
+        }
 
-                if (!businessName || !businessNumber || !countryCode || !phoneNumber || !inquiryContent) {
-                    e.preventDefault();
-                    alert('모든 필수 항목을 입력해주세요.');
-                    return false;
-                }
+        // 페이지 로드 시 저장된 언어 설정 불러오기
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLanguage = localStorage.getItem('selectedLanguage');
+            if (savedLanguage && savedLanguage !== 'ko') {
+                changeLanguage(savedLanguage);
+            }
+        });
 
-                // 사업자등록번호 형식 검사 (간단한 예시)
-                const businessNumberPattern = /^\d{3}-\d{2}-\d{5}$/;
-                if (!businessNumberPattern.test(businessNumber)) {
-                    e.preventDefault();
-                    alert('사업자등록번호 형식이 올바르지 않습니다. (예: 123-45-67890)');
-                    return false;
-                }
-            });
-        </script>
-    </th:block>
+        // 언어 변경 이벤트 리스너 (다른 페이지에서 언어가 변경될 때)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'selectedLanguage') {
+                changeLanguage(e.newValue);
+            }
+        });
+
+        // 폼 제출 시 유효성 검사
+        document.querySelector('.registration-form').addEventListener('submit', function(e) {
+            const businessName = document.getElementById('businessName').value.trim();
+            const businessNumber = document.getElementById('businessNumber').value.trim();
+            const countryCode = document.getElementById('countryCode').value;
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const inquiryContent = document.getElementById('inquiryContent').value.trim();
+
+            if (!businessName || !businessNumber || !countryCode || !phoneNumber || !inquiryContent) {
+                e.preventDefault();
+                alert('모든 필수 항목을 입력해주세요.');
+                return false;
+            }
+
+            // 사업자등록번호 형식 검사 (간단한 예시)
+            const businessNumberPattern = /^\d{3}-\d{2}-\d{5}$/;
+            if (!businessNumberPattern.test(businessNumber)) {
+                e.preventDefault();
+                alert('사업자등록번호 형식이 올바르지 않습니다. (예: 123-45-67890)');
+                return false;
+            }
+        });
+    </script>
+</th:block>
 </body>
 </html>
