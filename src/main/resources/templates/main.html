@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/layout.html}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portoria</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+
+  <!-- 추가 JavaScript 블록 -->
+  <th:block layout:fragment="script">
+    <script>
+      let currentSlideIndex = 1;
+      const totalSlides = 4;
+
+      function showSlide(n) {
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.dot');
+        const currentSlideSpan = document.querySelector('.current-slide');
+        
+        // 모든 슬라이드 숨기기
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        // 슬라이드 인덱스 조정
+        if (n > totalSlides) currentSlideIndex = 1;
+        if (n < 1) currentSlideIndex = totalSlides;
+        
+        // 현재 슬라이드 표시
+        slides[currentSlideIndex - 1].classList.add('active');
+        dots[currentSlideIndex - 1].classList.add('active');
+        currentSlideSpan.textContent = currentSlideIndex;
+      }
+
+      function changeSlide(direction) {
+        currentSlideIndex += direction;
+        showSlide(currentSlideIndex);
+      }
+
+      function currentSlide(n) {
+        currentSlideIndex = n;
+        showSlide(currentSlideIndex);
+      }
+
+      // 자동 슬라이드 (5초마다)
+      setInterval(() => {
+        currentSlideIndex++;
+        showSlide(currentSlideIndex);
+      }, 5000);
+
+      // 키보드 네비게이션
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+          changeSlide(-1);
+        } else if (e.key === 'ArrowRight') {
+          changeSlide(1);
+        }
+      });
+    </script>
+  </th:block>
+  <style>
+
+  </style>
+</head>
+<body>
+<!-- 메인화면 컨텐츠 -->
+<div class="content" layout:fragment="content">
+  <!-- 오류 메시지 -->
+  <div class="d-flex justify-content-center mt-3" th:if="${err}">
+    <div class="alert alert-danger" role="alert" th:text="${err}"></div>
+  </div>
+
+  <div class="container">
+    <br>
+    <!-- 히어로 배너 섹션 -->
+    <section class="hero-banner">
+      <div class="hero-slider">
+        <!-- 슬라이드 1: 프리미엄 와인 컬렉션 -->
+        <div class="hero-slide active" data-slide="1">
+          <div class="hero-content">
+            <div class="hero-text">
+              <h1 class="hero-title" data-ko="프리미엄 와인 컬렉션" data-en="Premium Wine Collection" data-pt="Coleção de Vinhos Premium">프리미엄 와인 컬렉션</h1>
+              <p class="hero-subtitle" data-ko="세계 최고의 와인을 만나보세요" data-en="Discover the world's finest wines" data-pt="Descubra os melhores vinhos do mundo">세계 최고의 와인을 만나보세요</p>
+              <button class="btn-hero" data-ko="지금 바로 탐색하기" data-en="Explore Now" data-pt="Explorar Agora">지금 바로 탐색하기</button>
+            </div>
+            <div class="hero-image">
+              <img src="/img/wine-collection.jpg" alt="프리미엄 와인 컬렉션" class="hero-wine-image">
+            </div>
+          </div>
+        </div>
+
+        <!-- 슬라이드 2: 보르도 와인 -->
+        <div class="hero-slide" data-slide="2">
+          <div class="hero-content">
+            <div class="hero-text">
+              <h1 class="hero-title" data-ko="보르도 와인의 전설" data-en="Legend of Bordeaux Wine" data-pt="Lenda do Vinho de Bordeaux">보르도 와인의 전설</h1>
+              <p class="hero-subtitle" data-ko="프랑스 보르도 지역의 명품 와인을 경험하세요" data-en="Experience the finest wines from Bordeaux, France" data-pt="Experimente os melhores vinhos de Bordeaux, França">프랑스 보르도 지역의 명품 와인을 경험하세요</p>
+              <button class="btn-hero" data-ko="보르도 컬렉션 보기" data-en="View Bordeaux Collection" data-pt="Ver Coleção de Bordeaux">보르도 컬렉션 보기</button>
+            </div>
+            <div class="hero-image">
+              <img src="/img/bordeaux-wine.jpg" alt="보르도 와인" class="hero-wine-image">
+            </div>
+          </div>
+        </div>
+
+        <!-- 슬라이드 3: 샴페인 -->
+        <div class="hero-slide" data-slide="3">
+          <div class="hero-content">
+            <div class="hero-text">
+              <h1 class="hero-title" data-ko="럭셔리 샴페인" data-en="Luxury Champagne" data-pt="Champagne de Luxo">럭셔리 샴페인</h1>
+              <p class="hero-subtitle" data-ko="특별한 순간을 위한 프리미엄 샴페인" data-en="Premium champagne for special moments" data-pt="Champagne premium para momentos especiais">특별한 순간을 위한 프리미엄 샴페인</p>
+              <button class="btn-hero" data-ko="샴페인 컬렉션 보기" data-en="View Champagne Collection" data-pt="Ver Coleção de Champagne">샴페인 컬렉션 보기</button>
+            </div>
+            <div class="hero-image">
+              <img src="/img/champagne.jpg" alt="럭셔리 샴페인" class="hero-wine-image">
+            </div>
+          </div>
+        </div>
+
+        <!-- 슬라이드 4: 나파 밸리 -->
+        <div class="hero-slide" data-slide="4">
+          <div class="hero-content">
+            <div class="hero-text">
+              <h1 class="hero-title" data-ko="나파 밸리 와인" data-en="Napa Valley Wine" data-pt="Vinho do Vale de Napa">나파 밸리 와인</h1>
+              <p class="hero-subtitle" data-ko="미국 최고의 와인 산지, 나파 밸리의 명품들" data-en="America's finest wine region, Napa Valley's masterpieces" data-pt="A melhor região vinícola da América, as obras-primas do Vale de Napa">미국 최고의 와인 산지, 나파 밸리의 명품들</p>
+              <button class="btn-hero" data-ko="나파 밸리 컬렉션 보기" data-en="View Napa Valley Collection" data-pt="Ver Coleção do Vale de Napa">나파 밸리 컬렉션 보기</button>
+            </div>
+            <div class="hero-image">
+              <img src="/img/napa-valley.jpg" alt="나파 밸리 와인" class="hero-wine-image">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-navigation">
+        <button class="nav-btn prev-btn" onclick="changeSlide(-1)">←</button>
+        <span class="nav-indicator">
+          <span class="current-slide">1</span>/4
+        </span>
+        <button class="nav-btn next-btn" onclick="changeSlide(1)">→</button>
+      </div>
+      
+      <div class="slide-dots">
+        <span class="dot active" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+      </div>
+    </section>
+
+    <!-- 특징 블록 섹션 -->
+    <section class="feature-blocks">
+      <div class="feature-block">
+        <div class="feature-image">
+          <img src="/img/vintage-wine.jpg" alt="빈티지 와인" class="feature-wine-image">
+        </div>
+        <h3 class="feature-title" data-ko="빈티지 와인" data-en="Vintage Wine" data-pt="Vinho Vintage">빈티지 와인</h3>
+        <a href="#" class="feature-link" data-ko="둘러보기 >" data-en="Explore >" data-pt="Explorar >">둘러보기 ></a>
+      </div>
+      
+      <div class="feature-block">
+        <div class="feature-badge" data-ko="할인 혜택 확인하기!" data-en="Check Discount Benefits!" data-pt="Verifique os Benefícios de Desconto!">할인 혜택 확인하기!</div>
+        <div class="feature-image">
+          <img src="/img/wine-set.jpg" alt="와인 세트" class="feature-wine-image">
+        </div>
+        <h3 class="feature-title" data-ko="와인 세트" data-en="Wine Set" data-pt="Conjunto de Vinhos">와인 세트</h3>
+        <a href="#" class="feature-link" data-ko="둘러보기 >" data-en="Explore >" data-pt="Explorar >">둘러보기 ></a>
+      </div>
+      
+      <div class="feature-block">
+        <div class="feature-badge" data-ko="할인 상품을 만나보세요!" data-en="Discover Discounted Products!" data-pt="Descubra Produtos com Desconto!">할인 상품을 만나보세요!</div>
+        <div class="feature-image">
+          <img src="/img/premium-wine.jpg" alt="프리미엄 와인" class="feature-wine-image">
+        </div>
+        <h3 class="feature-title" data-ko="프리미엄 와인" data-en="Premium Wine" data-pt="Vinho Premium">프리미엄 와인</h3>
+        <a href="#" class="feature-link" data-ko="둘러보기 >" data-en="Explore >" data-pt="Explorar >">둘러보기 ></a>
+      </div>
+    </section>
+
+    <!-- 프로모션 섹션 -->
+    <section class="promotion-section">
+      <!-- 포르투갈 날씨 위젯 -->
+      <div class="weather-widget">
+        <div class="weather-header">
+          <h3 class="weather-title" data-ko="포르투갈 이번주 날씨" data-en="Portugal This Week's Weather" data-pt="Clima de Portugal Esta Semana">포르투갈 이번주 날씨</h3>
+          <div class="weather-location">
+            <span class="location-icon">📍</span>
+            <span class="location-text clickable-location" id="locationText" onclick="changeWeatherLocation()" data-ko="리스본, 포르투갈" data-en="Lisbon, Portugal" data-pt="Lisboa, Portugal">리스본, 포르투갈</span>
+            <span class="location-change-hint" data-ko="(클릭하여 포르토로 변경)" data-en="(Click to change to Porto)" data-pt="(Clique para mudar para Porto)">(클릭하여 포르토로 변경)</span>
+          </div>
+        </div>
+        
+        <div class="weather-forecast">
+          <div class="weather-day">
+            <div class="day-name" data-ko="월" data-en="Mon" data-pt="Seg">월</div>
+            <div class="weather-icon" data-lisbon="☀️" data-porto="🌤️">☀️</div>
+            <div class="temperature">
+              <span class="temp-high" data-lisbon="22°" data-porto="19°">22°</span>
+              <span class="temp-low" data-lisbon="15°" data-porto="12°">15°</span>
+            </div>
+            <div class="weather-desc" data-ko="맑음" data-en="Sunny" data-pt="Ensolarado" data-lisbon="맑음" data-porto="맑음" data-lisbon-en="Sunny" data-lisbon-pt="Ensolarado" data-porto-en="Sunny" data-porto-pt="Ensolarado">맑음</div>
+          </div>
+          
+          <div class="weather-day">
+            <div class="day-name" data-ko="화" data-en="Tue" data-pt="Ter">화</div>
+            <div class="weather-icon" data-lisbon="⛅" data-porto="🌧️">⛅</div>
+            <div class="temperature">
+              <span class="temp-high" data-lisbon="20°" data-porto="17°">20°</span>
+              <span class="temp-low" data-lisbon="14°" data-porto="11°">14°</span>
+            </div>
+            <div class="weather-desc" data-ko="구름많음" data-en="Cloudy" data-pt="Nublado" data-lisbon="구름많음" data-porto="비" data-lisbon-en="Cloudy" data-lisbon-pt="Nublado" data-porto-en="Rain" data-porto-pt="Chuva">구름많음</div>
+          </div>
+          
+          <div class="weather-day">
+            <div class="day-name" data-ko="수" data-en="Wed" data-pt="Qua">수</div>
+            <div class="weather-icon" data-lisbon="🌧️" data-porto="🌦️">🌧️</div>
+            <div class="temperature">
+              <span class="temp-high" data-lisbon="18°" data-porto="16°">18°</span>
+              <span class="temp-low" data-lisbon="12°" data-porto="9°">12°</span>
+            </div>
+            <div class="weather-desc" data-ko="비" data-en="Rain" data-pt="Chuva" data-lisbon="비" data-porto="소나기" data-lisbon-en="Rain" data-lisbon-pt="Chuva" data-porto-en="Shower" data-porto-pt="Chuva">비</div>
+          </div>
+          
+          <div class="weather-day">
+            <div class="day-name" data-ko="목" data-en="Thu" data-pt="Qui">목</div>
+            <div class="weather-icon" data-lisbon="🌤️" data-porto="☀️">🌤️</div>
+            <div class="temperature">
+              <span class="temp-high" data-lisbon="21°" data-porto="18°">21°</span>
+              <span class="temp-low" data-lisbon="13°" data-porto="10°">13°</span>
+            </div>
+            <div class="weather-desc" data-ko="맑음" data-en="Clear" data-pt="Limpo" data-lisbon="맑음" data-porto="맑음" data-lisbon-en="Clear" data-lisbon-pt="Limpo" data-porto-en="Sunny" data-porto-pt="Ensolarado">맑음</div>
+          </div>
+          
+          <div class="weather-day">
+            <div class="day-name" data-ko="금" data-en="Fri" data-pt="Sex">금</div>
+            <div class="weather-icon" data-lisbon="☀️" data-porto="⛅">☀️</div>
+            <div class="temperature">
+              <span class="temp-high" data-lisbon="24°" data-porto="20°">24°</span>
+              <span class="temp-low" data-lisbon="16°" data-porto="13°">16°</span>
+            </div>
+            <div class="weather-desc" data-ko="맑음" data-en="Sunny" data-pt="Ensolarado" data-lisbon="맑음" data-porto="구름많음" data-lisbon-en="Sunny" data-lisbon-pt="Ensolarado" data-porto-en="Cloudy" data-porto-pt="Nublado">맑음</div>
+          </div>
+          
+          <div class="weather-day">
+            <div class="day-name" data-ko="토" data-en="Sat" data-pt="Sáb">토</div>
+            <div class="weather-icon" data-lisbon="⛅" data-porto="🌤️">⛅</div>
+            <div class="temperature">
+              <span class="temp-high" data-lisbon="23°" data-porto="19°">23°</span>
+              <span class="temp-low" data-lisbon="15°" data-porto="12°">15°</span>
+            </div>
+            <div class="weather-desc" data-ko="구름많음" data-en="Cloudy" data-pt="Nublado" data-lisbon="구름많음" data-porto="맑음" data-lisbon-en="Cloudy" data-lisbon-pt="Nublado" data-porto-en="Sunny" data-porto-pt="Ensolarado">구름많음</div>
+          </div>
+          
+          <div class="weather-day">
+            <div class="day-name" data-ko="일" data-en="Sun" data-pt="Dom">일</div>
+            <div class="weather-icon" data-lisbon="🌦️" data-porto="🌧️">🌦️</div>
+            <div class="temperature">
+              <span class="temp-high" data-lisbon="19°" data-porto="17°">19°</span>
+              <span class="temp-low" data-lisbon="13°" data-porto="10°">13°</span>
+            </div>
+            <div class="weather-desc" data-ko="소나기" data-en="Shower" data-pt="Chuva" data-lisbon="소나기" data-porto="비" data-lisbon-en="Shower" data-lisbon-pt="Chuva" data-porto-en="Rain" data-porto-pt="Chuva">소나기</div>
+          </div>
+        </div>
+        
+        <div class="weather-footer">
+          <div class="weather-note" data-ko="포르투갈의 완벽한 와인 테이스팅 날씨를 확인하세요!" data-en="Check the perfect weather for wine tasting in Portugal!" data-pt="Verifique o clima perfeito para degustação de vinhos em Portugal!">포르투갈의 완벽한 와인 테이스팅 날씨를 확인하세요!</div>
+          <div class="weather-update" data-ko="마지막 업데이트: 2024년 1월 15일" data-en="Last updated: January 15, 2024" data-pt="Última atualização: 15 de janeiro de 2024">마지막 업데이트: 2024년 1월 15일</div>
+        </div>
+      </div>
+      
+      <h2 class="promotion-title" data-ko="프로모션" data-en="Promotion" data-pt="Promoção">프로모션</h2>
+      <div class="product-cards">
+        <div class="product-card">
+          <div class="product-badges">
+            <span class="badge badge-limited" data-ko="한정판" data-en="Limited Edition" data-pt="Edição Limitada">한정판</span>
+            <span class="badge badge-new">New</span>
+          </div>
+          <div class="product-image">
+            <img src="/img/chateau-lafite.jpg" alt="샤토 라피트 로트실드 2015" class="product-wine-image">
+          </div>
+          <h3 class="product-name" data-ko="샤토 라피트 로트실드 2015" data-en="Château Lafite Rothschild 2015" data-pt="Château Lafite Rothschild 2015">샤토 라피트 로트실드 2015</h3>
+          <div class="product-price">₩2,500,000</div>
+          <button class="btn-add-cart" data-ko="장바구니에 담기" data-en="Add to Cart" data-pt="Adicionar ao Carrinho">장바구니에 담기</button>
+        </div>
+
+        <div class="product-card">
+          <div class="product-badges">
+            <span class="badge badge-sale" data-ko="판매" data-en="Sale" data-pt="Venda">판매</span>
+          </div>
+          <div class="product-image">
+            <img src="/img/domaine-romance-conti.jpg" alt="도멘 드 라 로마네 콘티 2018" class="product-wine-image">
+          </div>
+          <h3 class="product-name" data-ko="도멘 드 라 로마네 콘티 2018" data-en="Domaine de la Romanée-Conti 2018" data-pt="Domaine de la Romanée-Conti 2018">도멘 드 라 로마네 콘티 2018</h3>
+          <div class="product-price">
+            <span class="price-original">₩1,800,000</span>
+            <span class="price-sale">₩1,200,000</span>
+          </div>
+          <button class="btn-add-cart" data-ko="장바구니에 담기" data-en="Add to Cart" data-pt="Adicionar ao Carrinho">장바구니에 담기</button>
+        </div>
+
+        <div class="product-card">
+          <div class="product-badges">
+            <span class="badge badge-sale" data-ko="판매" data-en="Sale" data-pt="Venda">판매</span>
+          </div>
+          <div class="product-image">
+            <img src="/img/opus-one-petrus.jpg" alt="오펜하이머 2016 X 페트루스 2017" class="product-wine-image">
+          </div>
+          <h3 class="product-name" data-ko="오펜하이머 2016 X 페트루스 2017 콜라보레이션" data-en="Opus One 2016 X Petrus 2017 Collaboration" data-pt="Opus One 2016 X Petrus 2017 Colaboração">오펜하이머 2016 X 페트루스 2017 콜라보레이션</h3>
+          <div class="product-price">
+            <span class="price-original">₩3,000,000</span>
+            <span class="price-sale">₩2,100,000</span>
+          </div>
+          <button class="btn-add-cart" data-ko="장바구니에 담기" data-en="Add to Cart" data-pt="Adicionar ao Carrinho">장바구니에 담기</button>
+        </div>
+
+        <div class="product-card">
+          <div class="product-badges">
+            <span class="badge badge-soldout" data-ko="품절" data-en="Sold Out" data-pt="Esgotado">품절</span>
+          </div>
+          <div class="product-image">
+            <img src="/img/bordeaux-collection.jpg" alt="궁극의 보르도 컬렉션 2010" class="product-wine-image">
+          </div>
+          <h3 class="product-name" data-ko="궁극의 보르도 컬렉션 2010" data-en="Ultimate Bordeaux Collection 2010" data-pt="Coleção Definitiva de Bordeaux 2010">궁극의 보르도 컬렉션 2010</h3>
+          <div class="product-price">
+            <span class="price-original">₩1,500,000</span>
+            <span class="price-sale">₩1,200,000</span>
+          </div>
+          <button class="btn-soldout" disabled data-ko="품절" data-en="Sold Out" data-pt="Esgotado">품절</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 와인 익스피리언스 섹션 -->
+    <section class="experience-section">
+      <div class="experience-header">
+        <h2 class="experience-title" data-ko="와인 익스피리언스" data-en="Wine Experience" data-pt="Experiência com Vinhos">와인 익스피리언스</h2>
+        <a href="#" class="view-all-link" data-ko="모든 게시물 보기 >" data-en="View All Posts >" data-pt="Ver Todas as Postagens >">모든 게시물 보기 ></a>
+      </div>
+      <div class="experience-cards">
+        <div class="experience-card">
+          <div class="card-image">
+            <img src="/img/bordeaux-tour.jpg" alt="프랑스 보르도 투어" class="experience-wine-image">
+          </div>
+          <div class="card-content">
+            <div class="card-date">August 08 2025</div>
+            <h3 class="card-title" data-ko="프랑스 보르도의 매력: 와인 투어 가이드" data-en="The Charm of Bordeaux, France: Wine Tour Guide" data-pt="O Encanto de Bordeaux, França: Guia de Tour de Vinhos">프랑스 보르도의 매력: 와인 투어 가이드</h3>
+            <p class="card-description" data-ko="프랑스 보르도 지역은 세계에서 가장 유명한 와인 산지 중 하나입니다. 샤토 마고, 샤토 라피트 로트실드 등 전설적인 와인들을 만나보세요..." data-en="The Bordeaux region of France is one of the world's most famous wine regions. Discover legendary wines like Château Margaux, Château Lafite Rothschild..." data-pt="A região de Bordeaux, na França, é uma das regiões vinícolas mais famosas do mundo. Descubra vinhos lendários como Château Margaux, Château Lafite Rothschild...">프랑스 보르도 지역은 세계에서 가장 유명한 와인 산지 중 하나입니다. 샤토 마고, 샤토 라피트 로트실드 등 전설적인 와인들을 만나보세요...</p>
+            <a href="#" class="read-more-link" data-ko="더 읽기 >" data-en="Read More >" data-pt="Leia Mais >">더 읽기 ></a>
+          </div>
+        </div>
+
+        <div class="experience-card">
+          <div class="card-image">
+            <img src="/img/wine-cellar.jpg" alt="와인 셀라" class="experience-wine-image">
+          </div>
+          <div class="card-content">
+            <div class="card-date">May 16 2025</div>
+            <h3 class="card-title" data-ko="와인 보관의 모든 것: 셀라 관리 가이드" data-en="Everything About Wine Storage: Cellar Management Guide" data-pt="Tudo Sobre Armazenamento de Vinhos: Guia de Gestão de Adega">와인 보관의 모든 것: 셀라 관리 가이드</h3>
+            <p class="card-description" data-ko="좋은 와인을 보관하는 것은 와인을 선택하는 것만큼 중요합니다. 온도, 습도, 진동 등 와인 보관의 핵심 요소들을 알아보세요..." data-en="Storing good wine is as important as choosing wine. Learn about the key elements of wine storage: temperature, humidity, vibration..." data-pt="Armazenar um bom vinho é tão importante quanto escolher o vinho. Aprenda sobre os elementos-chave do armazenamento de vinhos: temperatura, umidade, vibração...">좋은 와인을 보관하는 것은 와인을 선택하는 것만큼 중요합니다. 온도, 습도, 진동 등 와인 보관의 핵심 요소들을 알아보세요...</p>
+            <a href="#" class="read-more-link" data-ko="더 읽기 >" data-en="Read More >" data-pt="Leia Mais >">더 읽기 ></a>
+          </div>
+        </div>
+
+        <div class="experience-card">
+          <div class="card-image">
+            <img src="/img/wine-labels.jpg" alt="와인 라벨" class="experience-wine-image">
+          </div>
+          <div class="card-content">
+            <div class="card-date">April 11 2025</div>
+            <h3 class="card-title" data-ko="와인 라벨 읽는 법: 숨겨진 이야기들" data-en="How to Read Wine Labels: Hidden Stories" data-pt="Como Ler Rótulos de Vinho: Histórias Ocultas">와인 라벨 읽는 법: 숨겨진 이야기들</h3>
+            <p class="card-description" data-ko="와인 라벨은 단순한 디자인이 아닙니다. 각 라벨에는 와인의 역사, 품질, 특성이 담겨있습니다. 와인 라벨의 비밀을 파헤쳐보세요..." data-en="Wine labels are not just simple designs. Each label contains the wine's history, quality, and characteristics. Discover the secrets of wine labels..." data-pt="Os rótulos de vinho não são apenas designs simples. Cada rótulo contém a história, qualidade e características do vinho. Descubra os segredos dos rótulos de vinho...">와인 라벨은 단순한 디자인이 아닙니다. 각 라벨에는 와인의 역사, 품질, 특성이 담겨있습니다. 와인 라벨의 비밀을 파헤쳐보세요...</p>
+            <a href="#" class="read-more-link" data-ko="더 읽기 >" data-en="Read More >" data-pt="Leia Mais >">더 읽기 ></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Shop by Brand 섹션 -->
+  <section class="shop-by-brand-section">
+    <h2 class="section-title" data-ko="브랜드별 쇼핑" data-en="Shop by Brand" data-pt="Comprar por Marca">Shop by Brand</h2>
+    <div class="brand-grid">
+      <div class="brand-item">
+        <img src="/img/brands/chateau-margaux.png" alt="Château Margaux" class="brand-logo-image">
+      </div>
+      <div class="brand-item">
+        <img src="/img/brands/chateau-lafite.png" alt="Château Lafite" class="brand-logo-image">
+      </div>
+      <div class="brand-item">
+        <img src="/img/brands/dom-perignon.png" alt="Dom Pérignon" class="brand-logo-image">
+      </div>
+      <div class="brand-item">
+        <img src="/img/brands/petrus.png" alt="Petrus" class="brand-logo-image">
+      </div>
+      <div class="brand-item">
+        <img src="/img/brands/opus-one.png" alt="Opus One" class="brand-logo-image">
+      </div>
+      <div class="brand-item">
+        <img src="/img/brands/domaine-romance-conti.png" alt="Domaine de la Romanée-Conti" class="brand-logo-image">
+      </div>
+      <div class="brand-item">
+        <img src="/img/brands/screaming-eagle.png" alt="Screaming Eagle" class="brand-logo-image">
+      </div>
+      <div class="brand-item">
+        <img src="/img/brands/mouton-rothschild.png" alt="Mouton Rothschild" class="brand-logo-image">
+      </div>
+      <div class="brand-item">
+        <img src="/img/brands/cristal.png" alt="Cristal" class="brand-logo-image">
+      </div>
+      <div class="brand-item">
+        <img src="/img/brands/krug.png" alt="Krug" class="brand-logo-image">
+      </div>
+      <div class="brand-item">
+        <img src="/img/brands/penfolds.png" alt="Penfolds" class="brand-logo-image">
+      </div>
+      <div class="brand-item">
+        <img src="/img/brands/vega-sicilia.png" alt="Vega Sicilia" class="brand-logo-image">
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <!-- 언어 전환 JavaScript -->
+  <th:block layout:fragment="script">
+    <script>
+      let currentLanguage = 'ko'; // 기본 언어는 한국어
+
+      function changeLanguage(lang) {
+        currentLanguage = lang;
+        
+        // 헤더의 언어 드롭다운 텍스트 변경
+        const languageDropdown = document.getElementById('languageDropdown');
+        if (languageDropdown) {
+          if (lang === 'ko') {
+            languageDropdown.textContent = '한국어';
+          } else if (lang === 'en') {
+            languageDropdown.textContent = 'English';
+          } else if (lang === 'pt') {
+            languageDropdown.textContent = 'Português';
+          }
+        }
+        
+        // 모든 data-ko, data-en, data-pt 속성을 가진 요소들의 텍스트 변경
+        const elements = document.querySelectorAll('[data-ko][data-en]');
+        elements.forEach(element => {
+          const text = element.getAttribute(`data-${lang}`);
+          if (text) {
+            element.textContent = text;
+          }
+        });
+        
+        // 로컬 스토리지에 언어 설정 저장
+        localStorage.setItem('selectedLanguage', lang);
+        
+        // 날씨 데이터도 언어에 맞게 업데이트
+        updateWeatherData();
+        
+        // 드롭다운 메뉴 닫기
+        const dropdown = document.querySelector('.dropdown-menu[aria-labelledby="languageDropdown"]');
+        if (dropdown) {
+          dropdown.classList.remove('show');
+        }
+        const dropdownToggle = document.getElementById('languageDropdown');
+        if (dropdownToggle) {
+          dropdownToggle.setAttribute('aria-expanded', 'false');
+        }
+      }
+
+      // 페이지 로드 시 저장된 언어 설정 불러오기
+      document.addEventListener('DOMContentLoaded', function() {
+        const savedLanguage = localStorage.getItem('selectedLanguage');
+        if (savedLanguage && savedLanguage !== 'ko') {
+          changeLanguage(savedLanguage);
+        }
+        
+        // 언어 드롭다운 수동 토글 기능 추가
+        const languageDropdown = document.getElementById('languageDropdown');
+        if (languageDropdown) {
+          languageDropdown.addEventListener('click', function(e) {
+            e.preventDefault();
+            const dropdownMenu = this.nextElementSibling;
+            if (dropdownMenu) {
+              dropdownMenu.classList.toggle('show');
+              this.setAttribute('aria-expanded', dropdownMenu.classList.contains('show'));
+            }
+          });
+        }
+        
+        // 다른 곳 클릭 시 드롭다운 닫기
+        document.addEventListener('click', function(e) {
+          const languageDropdown = document.getElementById('languageDropdown');
+          const dropdownMenu = document.querySelector('.dropdown-menu[aria-labelledby="languageDropdown"]');
+          
+          if (languageDropdown && dropdownMenu && 
+              !languageDropdown.contains(e.target) && 
+              !dropdownMenu.contains(e.target)) {
+            dropdownMenu.classList.remove('show');
+            languageDropdown.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+
+      // 기존 슬라이더 JavaScript
+      let currentSlideIndex = 1;
+      const totalSlides = 4;
+
+      function showSlide(n) {
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.dot');
+        const currentSlideSpan = document.querySelector('.current-slide');
+
+        // 모든 슬라이드 숨기기
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        // 슬라이드 인덱스 조정
+        if (n > totalSlides) currentSlideIndex = 1;
+        if (n < 1) currentSlideIndex = totalSlides;
+
+        // 현재 슬라이드 표시
+        slides[currentSlideIndex - 1].classList.add('active');
+        dots[currentSlideIndex - 1].classList.add('active');
+        currentSlideSpan.textContent = currentSlideIndex;
+      }
+
+      function changeSlide(direction) {
+        currentSlideIndex += direction;
+        showSlide(currentSlideIndex);
+      }
+
+      function currentSlide(n) {
+        currentSlideIndex = n;
+        showSlide(currentSlideIndex);
+      }
+
+      // 자동 슬라이드 (5초마다)
+      setInterval(() => {
+        currentSlideIndex++;
+        showSlide(currentSlideIndex);
+      }, 5000);
+
+      // 키보드 네비게이션
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+          changeSlide(-1);
+        } else if (e.key === 'ArrowRight') {
+          changeSlide(1);
+        }
+      });
+
+      // 날씨 지역 변경 기능
+      let currentLocation = 'lisbon'; // 기본값: 리스본
+      
+      // 전역 함수로 선언 (onclick에서 호출 가능하도록)
+      window.changeWeatherLocation = function() {
+        console.log('changeWeatherLocation 함수 호출됨');
+        const locationText = document.getElementById('locationText');
+        const locationHint = document.querySelector('.location-change-hint');
+        
+        if (!locationText) {
+          console.error('locationText 요소를 찾을 수 없습니다!');
+          return;
+        }
+        
+        if (!locationHint) {
+          console.error('locationHint 요소를 찾을 수 없습니다!');
+          return;
+        }
+        
+        console.log('현재 언어:', currentLanguage, '현재 지역:', currentLocation);
+        
+        if (currentLocation === 'lisbon') {
+          // 리스본에서 포르토로 변경
+          currentLocation = 'porto';
+          // 지역명과 힌트의 data 속성 업데이트
+          locationText.setAttribute('data-ko', '포르토, 포르투갈');
+          locationText.setAttribute('data-en', 'Porto, Portugal');
+          locationText.setAttribute('data-pt', 'Porto, Portugal');
+          locationHint.setAttribute('data-ko', '(클릭하여 리스본으로 변경)');
+          locationHint.setAttribute('data-en', '(Click to change to Lisbon)');
+          locationHint.setAttribute('data-pt', '(Clique para mudar para Lisboa)');
+          console.log('리스본에서 포르토로 변경됨');
+        } else {
+          // 포르토에서 리스본으로 변경
+          currentLocation = 'lisbon';
+          // 지역명과 힌트의 data 속성 업데이트
+          locationText.setAttribute('data-ko', '리스본, 포르투갈');
+          locationText.setAttribute('data-en', 'Lisbon, Portugal');
+          locationText.setAttribute('data-pt', 'Lisboa, Portugal');
+          locationHint.setAttribute('data-ko', '(클릭하여 포르토로 변경)');
+          locationHint.setAttribute('data-en', '(Click to change to Porto)');
+          locationHint.setAttribute('data-pt', '(Clique para mudar para Porto)');
+          console.log('포르토에서 리스본으로 변경됨');
+        }
+        
+        // 현재 언어에 맞게 텍스트 업데이트
+        locationText.textContent = locationText.getAttribute(`data-${currentLanguage}`);
+        locationHint.textContent = locationHint.getAttribute(`data-${currentLanguage}`);
+        
+        // 날씨 데이터 업데이트
+        updateWeatherData();
+      };
+      
+      function updateWeatherData() {
+        console.log('updateWeatherData 함수 호출됨, 현재 지역:', currentLocation);
+        const weatherIcons = document.querySelectorAll('.weather-icon');
+        const tempHighs = document.querySelectorAll('.temp-high');
+        const tempLows = document.querySelectorAll('.temp-low');
+        const weatherDescs = document.querySelectorAll('.weather-desc');
+        
+        console.log('찾은 요소들:', {
+          weatherIcons: weatherIcons.length,
+          tempHighs: tempHighs.length,
+          tempLows: tempLows.length,
+          weatherDescs: weatherDescs.length
+        });
+        
+        weatherIcons.forEach((icon, index) => {
+          const newIcon = icon.getAttribute(`data-${currentLocation}`);
+          if (newIcon) {
+            icon.textContent = newIcon;
+            console.log(`날씨 아이콘 ${index + 1} 업데이트:`, newIcon);
+          } else {
+            console.warn(`날씨 아이콘 ${index + 1}에 data-${currentLocation} 속성이 없습니다`);
+          }
+        });
+        
+        tempHighs.forEach((temp, index) => {
+          const newTemp = temp.getAttribute(`data-${currentLocation}`);
+          if (newTemp) {
+            temp.textContent = newTemp;
+            console.log(`최고기온 ${index + 1} 업데이트:`, newTemp);
+          } else {
+            console.warn(`최고기온 ${index + 1}에 data-${currentLocation} 속성이 없습니다`);
+          }
+        });
+        
+        tempLows.forEach((temp, index) => {
+          const newTemp = temp.getAttribute(`data-${currentLocation}`);
+          if (newTemp) {
+            temp.textContent = newTemp;
+            console.log(`최저기온 ${index + 1} 업데이트:`, newTemp);
+          } else {
+            console.warn(`최저기온 ${index + 1}에 data-${currentLocation} 속성이 없습니다`);
+          }
+        });
+        
+        weatherDescs.forEach((desc, index) => {
+          // 언어와 지역을 모두 고려한 속성명 생성
+          const attributeName = `data-${currentLocation}-${currentLanguage}`;
+          let newDesc = desc.getAttribute(attributeName);
+          
+          // 해당 속성이 없으면 기본 지역 속성 사용
+          if (!newDesc) {
+            newDesc = desc.getAttribute(`data-${currentLocation}`);
+          }
+          
+          if (newDesc) {
+            desc.textContent = newDesc;
+            console.log(`날씨 설명 ${index + 1} 업데이트:`, newDesc, `(속성: ${attributeName})`);
+          } else {
+            console.warn(`날씨 설명 ${index + 1}에 ${attributeName} 또는 data-${currentLocation} 속성이 없습니다`);
+          }
+        });
+      }
+      
+      // 페이지 로드 후 요소 확인
+      setTimeout(function() {
+        const locationElement = document.getElementById('locationText');
+        if (locationElement) {
+          locationElement.style.cursor = 'pointer';
+          console.log('지역 클릭 이벤트 리스너 등록됨');
+        } else {
+          console.error('locationText 요소를 찾을 수 없습니다!');
+        }
+      }, 100);
+    </script>
+  </th:block>
+
+</body>
+</html>

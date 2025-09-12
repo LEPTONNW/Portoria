@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 와인 추천 - Portoria</title>
+    <link rel="stylesheet" th:href="@{/css/aiwine.css}">
+</head>
+<body>
+    <div layout:fragment="content" class="ai-wine-container">
+        <div class="container">
+            <!-- 헤더 섹션 -->
+            <div class="ai-header">
+                <h1 class="page-title" data-ko="AI 와인 추천" data-en="AI Wine Recommendation" data-pt="Recomendação de Vinho IA">AI 와인 추천</h1>
+                <p class="page-subtitle" data-ko="AI가 당신의 취향에 맞는 완벽한 와인을 추천해드립니다. 어떤 음식과 함께 드실 건가요? 어떤 분위기를 원하시나요? 자유롭게 질문해보세요!" data-en="AI recommends the perfect wine for your taste. What food will you pair it with? What mood are you looking for? Feel free to ask anything!" data-pt="A IA recomenda o vinho perfeito para seu gosto. Com que comida você vai acompanhar? Que clima você está procurando? Sinta-se à vontade para perguntar qualquer coisa!">AI가 당신의 취향에 맞는 완벽한 와인을 추천해드립니다. 어떤 음식과 함께 드실 건가요? 어떤 분위기를 원하시나요? 자유롭게 질문해보세요!</p>
+            </div>
+
+            <!-- 채팅 인터페이스 -->
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- AI 환영 메시지 -->
+                    <div class="message ai-message">
+                        <div class="message-avatar">
+                            <div class="ai-avatar">AI</div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text" data-ko="안녕하세요! 저는 Portoria의 AI 와인 전문가입니다. 어떤 와인을 찾고 계신가요? 예를 들어:&#10;&#10;• '스테이크와 잘 어울리는 와인 추천해주세요'&#10;• '달콤한 디저트 와인 알려주세요'&#10;• '예산 5만원 이하의 좋은 와인 추천해주세요'&#10;• '로맨틱한 저녁에 어울리는 와인은?'" data-en="Hello! I'm Portoria's AI wine expert. What kind of wine are you looking for? For example:&#10;&#10;• 'Recommend a wine that goes well with steak'&#10;• 'Tell me about sweet dessert wines'&#10;• 'Recommend a good wine under $50'&#10;• 'What wine is good for a romantic evening?'" data-pt="Olá! Sou o especialista em vinhos IA da Portoria. Que tipo de vinho você está procurando? Por exemplo:&#10;&#10;• 'Recomende um vinho que combina bem com bife'&#10;• 'Me conte sobre vinhos doces de sobremesa'&#10;• 'Recomende um bom vinho abaixo de $50'&#10;• 'Que vinho é bom para uma noite romântica?'">안녕하세요! 저는 Portoria의 AI 와인 전문가입니다. 어떤 와인을 찾고 계신가요? 예를 들어:
+
+• '스테이크와 잘 어울리는 와인 추천해주세요'
+• '달콤한 디저트 와인 알려주세요'
+• '예산 5만원 이하의 좋은 와인 추천해주세요'
+• '로맨틱한 저녁에 어울리는 와인은?'</div>
+                            <div class="message-time" data-ko="방금 전" data-en="Just now" data-pt="Agora mesmo">방금 전</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 입력 영역 -->
+                <div class="chat-input-container">
+                    <div class="input-wrapper">
+                        <textarea id="messageInput" class="message-input" placeholder="와인에 대해 질문해보세요..." rows="3" data-ko-placeholder="와인에 대해 질문해보세요..." data-en-placeholder="Ask about wine..." data-pt-placeholder="Pergunte sobre vinho..."></textarea>
+                        <div class="input-actions">
+                            <button type="button" class="send-btn" id="sendBtn" data-ko="전송" data-en="Send" data-pt="Enviar">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="input-hint" data-ko="Enter 키를 눌러 전송하거나 전송 버튼을 클릭하세요" data-en="Press Enter to send or click the send button" data-pt="Pressione Enter para enviar ou clique no botão enviar">Enter 키를 눌러 전송하거나 전송 버튼을 클릭하세요</div>
+                </div>
+            </div>
+
+            <!-- 빠른 질문 버튼들 -->
+            <div class="quick-questions">
+                <h3 class="quick-title" data-ko="빠른 질문" data-en="Quick Questions" data-pt="Perguntas Rápidas">빠른 질문</h3>
+                <div class="quick-buttons">
+                    <button class="quick-btn" data-ko="스테이크와 어울리는 와인" data-en="Wine for steak" data-pt="Vinho para bife">스테이크와 어울리는 와인</button>
+                    <button class="quick-btn" data-ko="달콤한 디저트 와인" data-en="Sweet dessert wine" data-pt="Vinho doce de sobremesa">달콤한 디저트 와인</button>
+                    <button class="quick-btn" data-ko="예산 5만원 이하 와인" data-en="Wine under $50" data-pt="Vinho abaixo de $50">예산 5만원 이하 와인</button>
+                    <button class="quick-btn" data-ko="로맨틱한 저녁 와인" data-en="Romantic evening wine" data-pt="Vinho para noite romântica">로맨틱한 저녁 와인</button>
+                    <button class="quick-btn" data-ko="파티용 와인 추천" data-en="Party wine recommendation" data-pt="Recomendação de vinho para festa">파티용 와인 추천</button>
+                    <button class="quick-btn" data-ko="와인 보관 방법" data-en="Wine storage tips" data-pt="Dicas de armazenamento de vinho">와인 보관 방법</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <th:block layout:fragment="script">
+        <script>
+            // 언어 전환 기능
+            function updateAILanguage(lang) {
+                // 모든 data-ko, data-en, data-pt 속성을 가진 요소들의 텍스트 변경
+                const elements = document.querySelectorAll('[data-ko][data-en][data-pt]');
+                elements.forEach(element => {
+                    const text = element.getAttribute(`data-${lang}`);
+                    if (text) {
+                        element.textContent = text;
+                    }
+                });
+
+                // placeholder 속성도 변경
+                const inputs = document.querySelectorAll('[data-ko-placeholder]');
+                inputs.forEach(input => {
+                    const placeholder = input.getAttribute(`data-${lang}-placeholder`);
+                    if (placeholder) {
+                        input.placeholder = placeholder;
+                    }
+                });
+            }
+
+            // 전역 언어 전환 함수 (헤더에서 호출)
+            function changeLanguage(lang) {
+                // 헤더의 언어 드롭다운 텍스트 변경
+                const languageDropdown = document.getElementById('languageDropdown');
+                if (languageDropdown) {
+                    if (lang === 'ko') {
+                        languageDropdown.textContent = '한국어';
+                    } else if (lang === 'en') {
+                        languageDropdown.textContent = 'English';
+                    } else if (lang === 'pt') {
+                        languageDropdown.textContent = 'Português';
+                    }
+                }
+
+                // AI 페이지 언어 업데이트
+                updateAILanguage(lang);
+
+                // 로컬 스토리지에 언어 설정 저장
+                localStorage.setItem('selectedLanguage', lang);
+
+                // 드롭다운 메뉴 닫기
+                const dropdown = document.querySelector('.dropdown-menu[aria-labelledby="languageDropdown"]');
+                if (dropdown) {
+                    dropdown.classList.remove('show');
+                }
+                const dropdownToggle = document.getElementById('languageDropdown');
+                if (dropdownToggle) {
+                    dropdownToggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            // 페이지 로드 시 저장된 언어 설정 불러오기
+            document.addEventListener('DOMContentLoaded', function() {
+                const savedLanguage = localStorage.getItem('selectedLanguage');
+                if (savedLanguage && savedLanguage !== 'ko') {
+                    changeLanguage(savedLanguage);
+                }
+
+                // 채팅 기능 초기화
+                initializeChat();
+            });
+
+            // 언어 변경 이벤트 리스너 (다른 페이지에서 언어가 변경될 때)
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'selectedLanguage') {
+                    changeLanguage(e.newValue);
+                }
+            });
+
+            // 채팅 기능
+            function initializeChat() {
+                const messageInput = document.getElementById('messageInput');
+                const sendBtn = document.getElementById('sendBtn');
+                const chatMessages = document.getElementById('chatMessages');
+                const quickButtons = document.querySelectorAll('.quick-btn');
+
+                // 메시지 전송 함수
+                function sendMessage(message) {
+                    if (!message.trim()) return;
+
+                    // 사용자 메시지 추가
+                    addMessage(message, 'user');
+                    
+                    // 입력창 초기화
+                    messageInput.value = '';
+                    
+                    // AI 응답 시뮬레이션 (실제로는 서버와 통신)
+                    setTimeout(() => {
+                        const aiResponse = generateAIResponse(message);
+                        addMessage(aiResponse, 'ai');
+                    }, 1000);
+                }
+
+                // 메시지 추가 함수
+                function addMessage(text, sender) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `message ${sender}-message`;
+                    
+                    const time = new Date().toLocaleTimeString('ko-KR', { 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                    });
+
+                    if (sender === 'user') {
+                        messageDiv.innerHTML = `
+                            <div class="message-content">
+                                <div class="message-text">${text}</div>
+                                <div class="message-time">${time}</div>
+                            </div>
+                            <div class="message-avatar">
+                                <div class="user-avatar">나</div>
+                            </div>
+                        `;
+                    } else {
+                        messageDiv.innerHTML = `
+                            <div class="message-avatar">
+                                <div class="ai-avatar">AI</div>
+                            </div>
+                            <div class="message-content">
+                                <div class="message-text">${text}</div>
+                                <div class="message-time">${time}</div>
+                            </div>
+                        `;
+                    }
+
+                    chatMessages.appendChild(messageDiv);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+
+                // AI 응답 생성 함수 (실제로는 서버 API 호출)
+                function generateAIResponse(userMessage) {
+                    // 현재 언어 가져오기
+                    const currentLang = localStorage.getItem('selectedLanguage') || 'ko';
+                    
+                    const responses = {
+                        'ko': {
+                            '스테이크': '스테이크와 잘 어울리는 와인을 추천해드리겠습니다! 🥩🍷\n\n**추천 와인:**\n• **Cabernet Sauvignon** - 풍부한 탄닌과 깊은 맛\n• **Malbec** - 부드럽고 과일향이 진한 맛\n• **Syrah/Shiraz** - 스파이시하고 풀바디한 맛\n\n**가격대별 추천:**\n• 3-5만원: 칠레 산타 리타, 아르헨티나 트라피체\n• 5-10만원: 프랑스 보르도, 호주 펜폴즈\n• 10만원 이상: 미국 나파밸리, 이탈리아 토스카나\n\n스테이크의 굽기 정도에 따라 와인도 달라집니다. 레어한 스테이크에는 가벼운 와인을, 웰던 스테이크에는 진한 와인을 추천합니다!',
+                            '디저트': '달콤한 디저트 와인을 추천해드리겠습니다! 🍰🍷\n\n**추천 와인:**\n• **Moscato d\'Asti** - 가볍고 달콤한 이탈리아 와인\n• **Riesling** - 꽃향과 과일향이 풍부한 독일 와인\n• **Port Wine** - 진한 달콤함의 포르투갈 와인\n• **Sauternes** - 꿀같은 달콤함의 프랑스 와인\n\n**디저트별 페어링:**\n• 케이크: Moscato, Riesling\n• 초콜릿: Port Wine, Madeira\n• 치즈: Sauternes, Ice Wine\n• 과일: Prosecco, Lambrusco\n\n디저트 와인은 디저트보다 약간 더 달콤해야 완벽한 조화를 이룹니다!',
+                            '예산': '예산에 맞는 와인을 추천해드리겠습니다! 💰🍷\n\n**5만원 이하 추천:**\n• **칠레 와인**: 산타 리타, 코노 수르\n• **스페인 와인**: 리오하, 리베라 델 두에로\n• **이탈리아 와인**: 키안티, 몬테풀치아노\n• **호주 와인**: 옐로우 테일, 제이콥스 크릭\n\n**가성비 팁:**\n• 신세계 와인 (칠레, 아르헨티나, 호주)\n• 덜 알려진 유럽 지역의 와인\n• 대형 마트 자체 브랜드 와인\n• 와인 전문점의 추천 와인\n\n좋은 와인은 반드시 비싸지 않습니다. 자신의 취향을 찾는 것이 가장 중요해요!',
+                            '로맨틱': '로맨틱한 저녁에 어울리는 와인을 추천해드리겠습니다! 💕🍷\n\n**추천 와인:**\n• **Champagne** - 특별한 순간의 완벽한 선택\n• **Prosecco** - 가볍고 달콤한 이탈리아 스파클링\n• **Pinot Noir** - 우아하고 섬세한 레드 와인\n• **Chardonnay** - 부드럽고 크리미한 화이트 와인\n\n**분위기별 추천:**\n• 캐주얼한 로맨스: Prosecco, Moscato\n• 클래식한 로맨스: Champagne, Burgundy\n• 모던한 로맨스: New World Pinot Noir\n• 달콤한 로맨스: Dessert Wine, Port\n\n**페어링 추천:**\n• 초콜릿과 함께: Port Wine\n• 치즈와 함께: Champagne\n• 과일과 함께: Moscato\n• 촛불 저녁식사: Pinot Noir\n\n로맨틱한 순간을 더욱 특별하게 만들어드릴게요! 🌹',
+                            '파티': '파티용 와인을 추천해드리겠습니다! 🎉🍷\n\n**추천 와인:**\n• **Prosecco** - 가볍고 달콤한 이탈리아 스파클링\n• **Cava** - 스페인의 경제적인 스파클링 와인\n• **Pinot Grigio** - 가볍고 상큼한 화이트 와인\n• **Beaujolais** - 과일향이 진한 레드 와인\n\n**파티 팁:**\n• 다양한 취향을 고려한 선택\n• 가격대별 와인 준비\n• 간단한 안주와 잘 어울리는 와인\n• 시원하게 차갑게 서빙\n\n모든 사람이 즐길 수 있는 파티를 만들어보세요!',
+                            '보관': '와인 보관 방법을 알려드리겠습니다! 🍷\n\n**보관 조건:**\n• **온도**: 12-18°C (적정 온도 15°C)\n• **습도**: 60-70%\n• **광선**: 직사광선 차단\n• **진동**: 최소화\n\n**보관 팁:**\n• 와인 쿨러나 지하실 이용\n• 코르크 와인은 눕혀서 보관\n• 스크류캡은 세워서 보관\n• 보관 기간에 따른 온도 조절\n\n올바른 보관으로 와인의 진가를 느껴보세요!'
+                        },
+                        'en': {
+                            'steak': 'I\'ll recommend wines that pair perfectly with steak! 🥩🍷\n\n**Recommended Wines:**\n• **Cabernet Sauvignon** - Rich tannins and deep flavor\n• **Malbec** - Soft and fruity Argentine wine\n• **Syrah/Shiraz** - Spicy and full-bodied\n\n**Price Range Recommendations:**\n• $30-50: Chilean Santa Rita, Argentine Trapiche\n• $50-100: French Bordeaux, Australian Penfolds\n• $100+: Napa Valley, Italian Tuscany\n\nSteak doneness affects wine pairing. Light wines for rare steak, bold wines for well-done steak!',
+                            'dessert': 'I\'ll recommend sweet dessert wines! 🍰🍷\n\n**Recommended Wines:**\n• **Moscato d\'Asti** - Light and sweet Italian wine\n• **Riesling** - Floral and fruity German wine\n• **Port Wine** - Rich sweetness from Portugal\n• **Sauternes** - Honey-like sweetness from France\n\n**Dessert Pairings:**\n• Cake: Moscato, Riesling\n• Chocolate: Port Wine, Madeira\n• Cheese: Sauternes, Ice Wine\n• Fruit: Prosecco, Lambrusco\n\nDessert wine should be slightly sweeter than the dessert for perfect harmony!',
+                            'budget': 'I\'ll recommend wines within your budget! 💰🍷\n\n**Under $50 Recommendations:**\n• **Chilean Wines**: Santa Rita, Cono Sur\n• **Spanish Wines**: Rioja, Ribera del Duero\n• **Italian Wines**: Chianti, Montepulciano\n• **Australian Wines**: Yellow Tail, Jacobs Creek\n\n**Value Tips:**\n• New World wines (Chile, Argentina, Australia)\n• Lesser-known European regions\n• Supermarket private labels\n• Wine shop recommendations\n\nGreat wine doesn\'t have to be expensive. Finding your taste is most important!',
+                            'romantic': 'I\'ll recommend wines for a romantic evening! 💕🍷\n\n**Recommended Wines:**\n• **Champagne** - Perfect choice for special moments\n• **Prosecco** - Light and sweet Italian sparkling\n• **Pinot Noir** - Elegant and delicate red wine\n• **Chardonnay** - Soft and creamy white wine\n\n**Mood-based Recommendations:**\n• Casual romance: Prosecco, Moscato\n• Classic romance: Champagne, Burgundy\n• Modern romance: New World Pinot Noir\n• Sweet romance: Dessert Wine, Port\n\n**Pairing Recommendations:**\n• With chocolate: Port Wine\n• With cheese: Champagne\n• With fruit: Moscato\n• Candlelight dinner: Pinot Noir\n\nLet me make your romantic moments even more special! 🌹',
+                            'party': 'I\'ll recommend wines for your party! 🎉🍷\n\n**Recommended Wines:**\n• **Prosecco** - Light and sweet Italian sparkling\n• **Cava** - Economical Spanish sparkling wine\n• **Pinot Grigio** - Light and crisp white wine\n• **Beaujolais** - Fruity red wine\n\n**Party Tips:**\n• Consider diverse preferences\n• Prepare wines in different price ranges\n• Choose wines that pair well with simple appetizers\n• Serve chilled\n\nCreate a party that everyone can enjoy!',
+                            'storage': 'I\'ll tell you about wine storage methods! 🍷\n\n**Storage Conditions:**\n• **Temperature**: 12-18°C (optimal 15°C)\n• **Humidity**: 60-70%\n• **Light**: Avoid direct sunlight\n• **Vibration**: Minimize\n\n**Storage Tips:**\n• Use wine cooler or cellar\n• Store cork wines horizontally\n• Store screw cap wines vertically\n• Adjust temperature based on storage duration\n\nExperience the true value of wine through proper storage!'
+                        },
+                        'pt': {
+                            'bife': 'Vou recomendar vinhos que combinam perfeitamente com bife! 🥩🍷\n\n**Vinhos Recomendados:**\n• **Cabernet Sauvignon** - Taninos ricos e sabor profundo\n• **Malbec** - Vinho argentino suave e frutado\n• **Syrah/Shiraz** - Picante e encorpado\n\n**Recomendações por Faixa de Preço:**\n• $30-50: Santa Rita chileno, Trapiche argentino\n• $50-100: Bordeaux francês, Penfolds australiano\n• $100+: Napa Valley, Toscana italiana\n\nO ponto do bife afeta o harmonização. Vinhos leves para bife mal passado, vinhos encorpados para bem passado!',
+                            'sobremesa': 'Vou recomendar vinhos doces de sobremesa! 🍰🍷\n\n**Vinhos Recomendados:**\n• **Moscato d\'Asti** - Vinho italiano leve e doce\n• **Riesling** - Vinho alemão floral e frutado\n• **Vinho do Porto** - Doçura rica de Portugal\n• **Sauternes** - Doçura como mel da França\n\n**Harmonizações de Sobremesa:**\n• Bolo: Moscato, Riesling\n• Chocolate: Vinho do Porto, Madeira\n• Queijo: Sauternes, Ice Wine\n• Frutas: Prosecco, Lambrusco\n\nO vinho de sobremesa deve ser ligeiramente mais doce que a sobremesa para harmonia perfeita!',
+                            'orçamento': 'Vou recomendar vinhos dentro do seu orçamento! 💰🍷\n\n**Recomendações abaixo de $50:**\n• **Vinhos Chilenos**: Santa Rita, Cono Sur\n• **Vinhos Espanhóis**: Rioja, Ribera del Duero\n• **Vinhos Italianos**: Chianti, Montepulciano\n• **Vinhos Australianos**: Yellow Tail, Jacobs Creek\n\n**Dicas de Valor:**\n• Vinhos do Novo Mundo (Chile, Argentina, Austrália)\n• Regiões europeias menos conhecidas\n• Marcas próprias de supermercado\n• Recomendações de lojas de vinho\n\nGrande vinho não precisa ser caro. Encontrar seu gosto é mais importante!',
+                            'romântico': 'Vou recomendar vinhos para uma noite romântica! 💕🍷\n\n**Vinhos Recomendados:**\n• **Champagne** - Escolha perfeita para momentos especiais\n• **Prosecco** - Espumante italiano leve e doce\n• **Pinot Noir** - Vinho tinto elegante e delicado\n• **Chardonnay** - Vinho branco suave e cremoso\n\n**Recomendações por Clima:**\n• Romance casual: Prosecco, Moscato\n• Romance clássico: Champagne, Burgundy\n• Romance moderno: Pinot Noir do Novo Mundo\n• Romance doce: Vinho de Sobremesa, Porto\n\n**Recomendações de Harmonização:**\n• Com chocolate: Vinho do Porto\n• Com queijo: Champagne\n• Com frutas: Moscato\n• Jantar à luz de velas: Pinot Noir\n\nDeixe-me tornar seus momentos românticos ainda mais especiais! 🌹',
+                            'festa': 'Vou recomendar vinhos para sua festa! 🎉🍷\n\n**Vinhos Recomendados:**\n• **Prosecco** - Espumante italiano leve e doce\n• **Cava** - Vinho espumante espanhol econômico\n• **Pinot Grigio** - Vinho branco leve e crocante\n• **Beaujolais** - Vinho tinto frutado\n\n**Dicas de Festa:**\n• Considere preferências diversas\n• Prepare vinhos em diferentes faixas de preço\n• Escolha vinhos que combinam bem com aperitivos simples\n• Sirva gelado\n\nCrie uma festa que todos possam aproveitar!',
+                            'armazenamento': 'Vou falar sobre métodos de armazenamento de vinho! 🍷\n\n**Condições de Armazenamento:**\n• **Temperatura**: 12-18°C (ótima 15°C)\n• **Umidade**: 60-70%\n• **Luz**: Evite luz solar direta\n• **Vibração**: Minimize\n\n**Dicas de Armazenamento:**\n• Use adega ou porão\n• Armazene vinhos com rolha horizontalmente\n• Armazene vinhos com tampa de rosca verticalmente\n• Ajuste temperatura baseado na duração do armazenamento\n\nExperimente o verdadeiro valor do vinho através do armazenamento adequado!'
+                        }
+                    };
+
+                    // 키워드 기반 응답 (현재 언어에 따라)
+                    const langResponses = responses[currentLang] || responses['ko'];
+                    for (const keyword in langResponses) {
+                        if (userMessage.toLowerCase().includes(keyword.toLowerCase())) {
+                            return langResponses[keyword];
+                        }
+                    }
+
+                    // 기본 응답 (현재 언어에 따라)
+                    const defaultResponses = {
+                        'ko': `흥미로운 질문이네요! "${userMessage}"에 대해 더 자세히 알려주시면, 더 정확한 와인 추천을 드릴 수 있습니다. 🍷\n\n다음 정보를 알려주시면 도움이 됩니다:\n• 어떤 음식과 함께 드실 건가요?\n• 선호하는 와인 스타일이 있나요?\n• 예산은 어느 정도인가요?\n• 특별한 상황이나 분위기가 있나요?\n\n언제든지 자유롭게 질문해주세요!`,
+                        'en': `Interesting question! If you could provide more details about "${userMessage}", I can give you more accurate wine recommendations. 🍷\n\nThe following information would be helpful:\n• What food will you pair it with?\n• Do you have a preferred wine style?\n• What's your budget range?\n• Any special occasion or mood?\n\nFeel free to ask anything!`,
+                        'pt': `Pergunta interessante! Se você puder fornecer mais detalhes sobre "${userMessage}", posso dar recomendações de vinho mais precisas. 🍷\n\nAs seguintes informações seriam úteis:\n• Com que comida você vai harmonizar?\n• Você tem um estilo de vinho preferido?\n• Qual é sua faixa de orçamento?\n• Alguma ocasião especial ou clima?\n\nSinta-se à vontade para perguntar qualquer coisa!`
+                    };
+
+                    return defaultResponses[currentLang] || defaultResponses['ko'];
+                }
+
+                // 이벤트 리스너
+                sendBtn.addEventListener('click', () => {
+                    sendMessage(messageInput.value);
+                });
+
+                messageInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendMessage(messageInput.value);
+                    }
+                });
+
+                // 빠른 질문 버튼
+                quickButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        sendMessage(btn.textContent);
+                    });
+                });
+            }
+        </script>
+    </th:block>
+</body>
+</html>
