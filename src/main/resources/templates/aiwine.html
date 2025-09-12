@@ -159,11 +159,76 @@
                     // 입력창 초기화
                     messageInput.value = '';
                     
-                    // AI 응답 시뮬레이션 (실제로는 서버와 통신)
-                    setTimeout(() => {
-                        const aiResponse = generateAIResponse(message);
-                        addMessage(aiResponse, 'ai');
-                    }, 1000);
+                    // "답변 작성중..." 메시지 표시
+                    const loadingMessageId = addLoadingMessage();
+                    
+                    // AI 응답 생성
+                    const aiResponse = generateAIResponse(message);
+                    
+                    // Promise인 경우 처리
+                    if (aiResponse instanceof Promise) {
+                        aiResponse.then(response => {
+                            // 로딩 메시지 제거
+                            removeLoadingMessage(loadingMessageId);
+                            // 실제 AI 응답 추가
+                            addMessage(response, 'ai');
+                        }).catch(error => {
+                            console.error('AI 응답 오류:', error);
+                            // 로딩 메시지 제거
+                            removeLoadingMessage(loadingMessageId);
+                            // 오류 메시지 추가
+                            addMessage('죄송합니다. 응답을 생성하는 중 오류가 발생했습니다.', 'ai');
+                        });
+                    } else {
+                        // 즉시 응답인 경우
+                        setTimeout(() => {
+                            // 로딩 메시지 제거
+                            removeLoadingMessage(loadingMessageId);
+                            // 실제 AI 응답 추가
+                            addMessage(aiResponse, 'ai');
+                        }, 1000);
+                    }
+                }
+
+                // 로딩 메시지 추가 함수
+                function addLoadingMessage() {
+                    const messageDiv = document.createElement('div');
+                    const messageId = 'loading-' + Date.now();
+                    messageDiv.id = messageId;
+                    messageDiv.className = 'message ai-message loading-message';
+                    
+                    const time = new Date().toLocaleTimeString('ko-KR', { 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                    });
+
+                    messageDiv.innerHTML = `
+                        <div class="message-avatar">
+                            <div class="ai-avatar">AI</div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">
+                                <span class="loading-text">답변 작성중</span>
+                                <span class="loading-dots">
+                                    <span>.</span><span>.</span><span>.</span>
+                                </span>
+                            </div>
+                            <div class="message-time">${time}</div>
+                        </div>
+                    `;
+
+                    chatMessages.appendChild(messageDiv);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    return messageId;
+                }
+
+                // 로딩 메시지 제거 함수
+                function removeLoadingMessage(messageId) {
+                    const loadingMessage = document.getElementById(messageId);
+                    if (loadingMessage) {
+                        loadingMessage.remove();
+                    }
                 }
 
                 // 메시지 추가 함수
@@ -242,14 +307,8 @@
                         }
                     }
 
-                    // 기본 응답 (현재 언어에 따라)
-                    const defaultResponses = {
-                        'ko': `흥미로운 질문이네요! "${userMessage}"에 대해 더 자세히 알려주시면, 더 정확한 와인 추천을 드릴 수 있습니다. 🍷\n\n다음 정보를 알려주시면 도움이 됩니다:\n• 어떤 음식과 함께 드실 건가요?\n• 선호하는 와인 스타일이 있나요?\n• 예산은 어느 정도인가요?\n• 특별한 상황이나 분위기가 있나요?\n\n언제든지 자유롭게 질문해주세요!`,
-                        'en': `Interesting question! If you could provide more details about "${userMessage}", I can give you more accurate wine recommendations. 🍷\n\nThe following information would be helpful:\n• What food will you pair it with?\n• Do you have a preferred wine style?\n• What's your budget range?\n• Any special occasion or mood?\n\nFeel free to ask anything!`,
-                        'pt': `Pergunta interessante! Se você puder fornecer mais detalhes sobre "${userMessage}", posso dar recomendações de vinho mais precisas. 🍷\n\nAs seguintes informações seriam úteis:\n• Com que comida você vai harmonizar?\n• Você tem um estilo de vinho preferido?\n• Qual é sua faixa de orçamento?\n• Alguma ocasião especial ou clima?\n\nSinta-se à vontade para perguntar qualquer coisa!`
-                    };
-
-                    return defaultResponses[currentLang] || defaultResponses['ko'];
+                    // 기본 응답은 wineai() 함수를 사용
+                    return wineai(userMessage);
                 }
 
                 // 이벤트 리스너
@@ -270,6 +329,39 @@
                         sendMessage(btn.textContent);
                     });
                 });
+            }
+
+            function wineai(userMessage) {
+                return fetch(`wineai/answer`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: userMessage
+                })
+                    .then(response => {
+                        if(!response.ok) {
+                            return response.text().then(errData => {
+                                throw new Error(errData || '서버 응답 오류');
+                            });
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        return data;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        // 오류 발생 시 기본 응답 반환
+                        const currentLang = localStorage.getItem('selectedLanguage') || 'ko';
+                        const errorResponses = {
+                            'ko': '죄송합니다. 현재 서버에 문제가 있어 와인 추천을 제공할 수 없습니다. 잠시 후 다시 시도해주세요.',
+                            'en': 'Sorry, there is currently a server issue and we cannot provide wine recommendations. Please try again later.',
+                            'pt': 'Desculpe, há atualmente um problema no servidor e não podemos fornecer recomendações de vinho. Tente novamente mais tarde.'
+                        };
+                        return errorResponses[currentLang] || errorResponses['ko'];
+                    });
             }
         </script>
     </th:block>

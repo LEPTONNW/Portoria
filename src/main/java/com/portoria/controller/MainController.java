@@ -1,4 +1,4 @@
-package com.portoria.component;
+package com.portoria.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @Log4j2
 public class MainController {
+
     @GetMapping("/")
     public String home() {
         return "main";
@@ -25,5 +26,12 @@ public class MainController {
     public String aiwine() {
         return "aiwine";
     }
+
+    @GetMapping("/video")
+    public String video() {
+
+        return "video";
+    }
+
 
 }
