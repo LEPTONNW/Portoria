@@ -3,55 +3,15 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+
+    </style>
 </head>
 <body>
-<div th:fragment="header" class="header-container">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <!-- 로고 영역 -->
-            <div class="col-md-3">
-                <div class="logo-section">
-                    <h1 class="logo-text">Portoria</h1>
-                    <p class="logo-subtitle">SINCE 2025</p>
-                </div>
-            </div>
+<div th:fragment="header">
 
-            <!-- 네비게이션 메뉴 -->
-            <div class="col-md-9">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="navbar-nav ms-auto">
-                        <a class="nav-link special-offer" th:href="@{/}">홈화면</a>
-                        <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                메인메뉴
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" th:href="@{/aiwine}">AI 와인추천</a></li>
-                                <li><a class="dropdown-item" href="#">솔루션</a></li>
-                            </ul>
-                        </div>
-                        <a class="nav-link" th:href="@{/createbrand}">농장문의</a>
-                        <a class="nav-link" href="#">판매품목</a>
-                        <a class="nav-link" href="#">액세서리</a>
-                        <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="languageDropdown">
-                                한국어
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                                <li><a class="dropdown-item" href="#" onclick="changeLanguage('ko')">한국어</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="changeLanguage('pt')">Português</a></li>
-                            </ul>
-                        </div>
-                        <button class="btn btn-club">Portoria 클럽</button>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
 </div>
-</body>
-</html>
-
-
-

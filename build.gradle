@@ -22,7 +22,6 @@ configurations {
 
 repositories {
     mavenCentral()
-    maven { url 'https://maven.google.com' }
 }
 
 dependencies {
@@ -42,9 +41,6 @@ dependencies {
 
     //매퍼
     implementation 'org.modelmapper:modelmapper:3.1.0'
-
-    //Google AI SDK는 HTTP 요청으로 직접 호출하므로 별도 라이브러리 불필요
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 tasks.named('test') {
