@@ -18,10 +18,14 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+
+
 }
 
 repositories {
     mavenCentral()
+
+    maven { url 'https://maven.google.com' }
 }
 
 dependencies {
@@ -41,6 +45,9 @@ dependencies {
 
     //매퍼
     implementation 'org.modelmapper:modelmapper:3.1.0'
+
+    //Google SDK
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 tasks.named('test') {

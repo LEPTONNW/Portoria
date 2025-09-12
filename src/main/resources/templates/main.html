@@ -19,15 +19,15 @@
         const slides = document.querySelectorAll('.hero-slide');
         const dots = document.querySelectorAll('.dot');
         const currentSlideSpan = document.querySelector('.current-slide');
-        
+
         // 모든 슬라이드 숨기기
         slides.forEach(slide => slide.classList.remove('active'));
         dots.forEach(dot => dot.classList.remove('active'));
-        
+
         // 슬라이드 인덱스 조정
         if (n > totalSlides) currentSlideIndex = 1;
         if (n < 1) currentSlideIndex = totalSlides;
-        
+
         // 현재 슬라이드 표시
         slides[currentSlideIndex - 1].classList.add('active');
         dots[currentSlideIndex - 1].classList.add('active');
@@ -133,7 +133,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="hero-navigation">
         <button class="nav-btn prev-btn" onclick="changeSlide(-1)">←</button>
         <span class="nav-indicator">
@@ -141,7 +141,7 @@
         </span>
         <button class="nav-btn next-btn" onclick="changeSlide(1)">→</button>
       </div>
-      
+
       <div class="slide-dots">
         <span class="dot active" onclick="currentSlide(1)"></span>
         <span class="dot" onclick="currentSlide(2)"></span>
@@ -159,7 +159,7 @@
         <h3 class="feature-title" data-ko="빈티지 와인" data-en="Vintage Wine" data-pt="Vinho Vintage">빈티지 와인</h3>
         <a href="#" class="feature-link" data-ko="둘러보기 >" data-en="Explore >" data-pt="Explorar >">둘러보기 ></a>
       </div>
-      
+
       <div class="feature-block">
         <div class="feature-badge" data-ko="할인 혜택 확인하기!" data-en="Check Discount Benefits!" data-pt="Verifique os Benefícios de Desconto!">할인 혜택 확인하기!</div>
         <div class="feature-image">
@@ -168,7 +168,7 @@
         <h3 class="feature-title" data-ko="와인 세트" data-en="Wine Set" data-pt="Conjunto de Vinhos">와인 세트</h3>
         <a href="#" class="feature-link" data-ko="둘러보기 >" data-en="Explore >" data-pt="Explorar >">둘러보기 ></a>
       </div>
-      
+
       <div class="feature-block">
         <div class="feature-badge" data-ko="할인 상품을 만나보세요!" data-en="Discover Discounted Products!" data-pt="Descubra Produtos com Desconto!">할인 상품을 만나보세요!</div>
         <div class="feature-image">
@@ -191,7 +191,7 @@
             <span class="location-change-hint" data-ko="(클릭하여 포르토로 변경)" data-en="(Click to change to Porto)" data-pt="(Clique para mudar para Porto)">(클릭하여 포르토로 변경)</span>
           </div>
         </div>
-        
+
         <div class="weather-forecast">
           <div class="weather-day">
             <div class="day-name" data-ko="월" data-en="Mon" data-pt="Seg">월</div>
@@ -202,7 +202,7 @@
             </div>
             <div class="weather-desc" data-ko="맑음" data-en="Sunny" data-pt="Ensolarado" data-lisbon="맑음" data-porto="맑음" data-lisbon-en="Sunny" data-lisbon-pt="Ensolarado" data-porto-en="Sunny" data-porto-pt="Ensolarado">맑음</div>
           </div>
-          
+
           <div class="weather-day">
             <div class="day-name" data-ko="화" data-en="Tue" data-pt="Ter">화</div>
             <div class="weather-icon" data-lisbon="⛅" data-porto="🌧️">⛅</div>
@@ -212,7 +212,7 @@
             </div>
             <div class="weather-desc" data-ko="구름많음" data-en="Cloudy" data-pt="Nublado" data-lisbon="구름많음" data-porto="비" data-lisbon-en="Cloudy" data-lisbon-pt="Nublado" data-porto-en="Rain" data-porto-pt="Chuva">구름많음</div>
           </div>
-          
+
           <div class="weather-day">
             <div class="day-name" data-ko="수" data-en="Wed" data-pt="Qua">수</div>
             <div class="weather-icon" data-lisbon="🌧️" data-porto="🌦️">🌧️</div>
@@ -222,7 +222,7 @@
             </div>
             <div class="weather-desc" data-ko="비" data-en="Rain" data-pt="Chuva" data-lisbon="비" data-porto="소나기" data-lisbon-en="Rain" data-lisbon-pt="Chuva" data-porto-en="Shower" data-porto-pt="Chuva">비</div>
           </div>
-          
+
           <div class="weather-day">
             <div class="day-name" data-ko="목" data-en="Thu" data-pt="Qui">목</div>
             <div class="weather-icon" data-lisbon="🌤️" data-porto="☀️">🌤️</div>
@@ -232,7 +232,7 @@
             </div>
             <div class="weather-desc" data-ko="맑음" data-en="Clear" data-pt="Limpo" data-lisbon="맑음" data-porto="맑음" data-lisbon-en="Clear" data-lisbon-pt="Limpo" data-porto-en="Sunny" data-porto-pt="Ensolarado">맑음</div>
           </div>
-          
+
           <div class="weather-day">
             <div class="day-name" data-ko="금" data-en="Fri" data-pt="Sex">금</div>
             <div class="weather-icon" data-lisbon="☀️" data-porto="⛅">☀️</div>
@@ -242,7 +242,7 @@
             </div>
             <div class="weather-desc" data-ko="맑음" data-en="Sunny" data-pt="Ensolarado" data-lisbon="맑음" data-porto="구름많음" data-lisbon-en="Sunny" data-lisbon-pt="Ensolarado" data-porto-en="Cloudy" data-porto-pt="Nublado">맑음</div>
           </div>
-          
+
           <div class="weather-day">
             <div class="day-name" data-ko="토" data-en="Sat" data-pt="Sáb">토</div>
             <div class="weather-icon" data-lisbon="⛅" data-porto="🌤️">⛅</div>
@@ -252,7 +252,7 @@
             </div>
             <div class="weather-desc" data-ko="구름많음" data-en="Cloudy" data-pt="Nublado" data-lisbon="구름많음" data-porto="맑음" data-lisbon-en="Cloudy" data-lisbon-pt="Nublado" data-porto-en="Sunny" data-porto-pt="Ensolarado">구름많음</div>
           </div>
-          
+
           <div class="weather-day">
             <div class="day-name" data-ko="일" data-en="Sun" data-pt="Dom">일</div>
             <div class="weather-icon" data-lisbon="🌦️" data-porto="🌧️">🌦️</div>
@@ -263,13 +263,13 @@
             <div class="weather-desc" data-ko="소나기" data-en="Shower" data-pt="Chuva" data-lisbon="소나기" data-porto="비" data-lisbon-en="Shower" data-lisbon-pt="Chuva" data-porto-en="Rain" data-porto-pt="Chuva">소나기</div>
           </div>
         </div>
-        
+
         <div class="weather-footer">
           <div class="weather-note" data-ko="포르투갈의 완벽한 와인 테이스팅 날씨를 확인하세요!" data-en="Check the perfect weather for wine tasting in Portugal!" data-pt="Verifique o clima perfeito para degustação de vinhos em Portugal!">포르투갈의 완벽한 와인 테이스팅 날씨를 확인하세요!</div>
           <div class="weather-update" data-ko="마지막 업데이트: 2024년 1월 15일" data-en="Last updated: January 15, 2024" data-pt="Última atualização: 15 de janeiro de 2024">마지막 업데이트: 2024년 1월 15일</div>
         </div>
       </div>
-      
+
       <h2 class="promotion-title" data-ko="프로모션" data-en="Promotion" data-pt="Promoção">프로모션</h2>
       <div class="product-cards">
         <div class="product-card">
@@ -421,264 +421,264 @@
     </div>
   </section>
 
-  </div>
+</div>
 
-  <!-- 언어 전환 JavaScript -->
-  <th:block layout:fragment="script">
-    <script>
-      let currentLanguage = 'ko'; // 기본 언어는 한국어
+<!-- 언어 전환 JavaScript -->
+<th:block layout:fragment="script">
+  <script>
+    let currentLanguage = 'ko'; // 기본 언어는 한국어
 
-      function changeLanguage(lang) {
-        currentLanguage = lang;
-        
-        // 헤더의 언어 드롭다운 텍스트 변경
-        const languageDropdown = document.getElementById('languageDropdown');
-        if (languageDropdown) {
-          if (lang === 'ko') {
-            languageDropdown.textContent = '한국어';
-          } else if (lang === 'en') {
-            languageDropdown.textContent = 'English';
-          } else if (lang === 'pt') {
-            languageDropdown.textContent = 'Português';
-          }
-        }
-        
-        // 모든 data-ko, data-en, data-pt 속성을 가진 요소들의 텍스트 변경
-        const elements = document.querySelectorAll('[data-ko][data-en]');
-        elements.forEach(element => {
-          const text = element.getAttribute(`data-${lang}`);
-          if (text) {
-            element.textContent = text;
-          }
-        });
-        
-        // 로컬 스토리지에 언어 설정 저장
-        localStorage.setItem('selectedLanguage', lang);
-        
-        // 날씨 데이터도 언어에 맞게 업데이트
-        updateWeatherData();
-        
-        // 드롭다운 메뉴 닫기
-        const dropdown = document.querySelector('.dropdown-menu[aria-labelledby="languageDropdown"]');
-        if (dropdown) {
-          dropdown.classList.remove('show');
-        }
-        const dropdownToggle = document.getElementById('languageDropdown');
-        if (dropdownToggle) {
-          dropdownToggle.setAttribute('aria-expanded', 'false');
+    function changeLanguage(lang) {
+      currentLanguage = lang;
+
+      // 헤더의 언어 드롭다운 텍스트 변경
+      const languageDropdown = document.getElementById('languageDropdown');
+      if (languageDropdown) {
+        if (lang === 'ko') {
+          languageDropdown.textContent = '한국어';
+        } else if (lang === 'en') {
+          languageDropdown.textContent = 'English';
+        } else if (lang === 'pt') {
+          languageDropdown.textContent = 'Português';
         }
       }
 
-      // 페이지 로드 시 저장된 언어 설정 불러오기
-      document.addEventListener('DOMContentLoaded', function() {
-        const savedLanguage = localStorage.getItem('selectedLanguage');
-        if (savedLanguage && savedLanguage !== 'ko') {
-          changeLanguage(savedLanguage);
-        }
-        
-        // 언어 드롭다운 수동 토글 기능 추가
-        const languageDropdown = document.getElementById('languageDropdown');
-        if (languageDropdown) {
-          languageDropdown.addEventListener('click', function(e) {
-            e.preventDefault();
-            const dropdownMenu = this.nextElementSibling;
-            if (dropdownMenu) {
-              dropdownMenu.classList.toggle('show');
-              this.setAttribute('aria-expanded', dropdownMenu.classList.contains('show'));
-            }
-          });
-        }
-        
-        // 다른 곳 클릭 시 드롭다운 닫기
-        document.addEventListener('click', function(e) {
-          const languageDropdown = document.getElementById('languageDropdown');
-          const dropdownMenu = document.querySelector('.dropdown-menu[aria-labelledby="languageDropdown"]');
-          
-          if (languageDropdown && dropdownMenu && 
-              !languageDropdown.contains(e.target) && 
-              !dropdownMenu.contains(e.target)) {
-            dropdownMenu.classList.remove('show');
-            languageDropdown.setAttribute('aria-expanded', 'false');
-          }
-        });
-      });
-
-      // 기존 슬라이더 JavaScript
-      let currentSlideIndex = 1;
-      const totalSlides = 4;
-
-      function showSlide(n) {
-        const slides = document.querySelectorAll('.hero-slide');
-        const dots = document.querySelectorAll('.dot');
-        const currentSlideSpan = document.querySelector('.current-slide');
-
-        // 모든 슬라이드 숨기기
-        slides.forEach(slide => slide.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-
-        // 슬라이드 인덱스 조정
-        if (n > totalSlides) currentSlideIndex = 1;
-        if (n < 1) currentSlideIndex = totalSlides;
-
-        // 현재 슬라이드 표시
-        slides[currentSlideIndex - 1].classList.add('active');
-        dots[currentSlideIndex - 1].classList.add('active');
-        currentSlideSpan.textContent = currentSlideIndex;
-      }
-
-      function changeSlide(direction) {
-        currentSlideIndex += direction;
-        showSlide(currentSlideIndex);
-      }
-
-      function currentSlide(n) {
-        currentSlideIndex = n;
-        showSlide(currentSlideIndex);
-      }
-
-      // 자동 슬라이드 (5초마다)
-      setInterval(() => {
-        currentSlideIndex++;
-        showSlide(currentSlideIndex);
-      }, 5000);
-
-      // 키보드 네비게이션
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') {
-          changeSlide(-1);
-        } else if (e.key === 'ArrowRight') {
-          changeSlide(1);
+      // 모든 data-ko, data-en, data-pt 속성을 가진 요소들의 텍스트 변경
+      const elements = document.querySelectorAll('[data-ko][data-en]');
+      elements.forEach(element => {
+        const text = element.getAttribute(`data-${lang}`);
+        if (text) {
+          element.textContent = text;
         }
       });
 
-      // 날씨 지역 변경 기능
-      let currentLocation = 'lisbon'; // 기본값: 리스본
-      
-      // 전역 함수로 선언 (onclick에서 호출 가능하도록)
-      window.changeWeatherLocation = function() {
-        console.log('changeWeatherLocation 함수 호출됨');
-        const locationText = document.getElementById('locationText');
-        const locationHint = document.querySelector('.location-change-hint');
-        
-        if (!locationText) {
-          console.error('locationText 요소를 찾을 수 없습니다!');
-          return;
-        }
-        
-        if (!locationHint) {
-          console.error('locationHint 요소를 찾을 수 없습니다!');
-          return;
-        }
-        
-        console.log('현재 언어:', currentLanguage, '현재 지역:', currentLocation);
-        
-        if (currentLocation === 'lisbon') {
-          // 리스본에서 포르토로 변경
-          currentLocation = 'porto';
-          // 지역명과 힌트의 data 속성 업데이트
-          locationText.setAttribute('data-ko', '포르토, 포르투갈');
-          locationText.setAttribute('data-en', 'Porto, Portugal');
-          locationText.setAttribute('data-pt', 'Porto, Portugal');
-          locationHint.setAttribute('data-ko', '(클릭하여 리스본으로 변경)');
-          locationHint.setAttribute('data-en', '(Click to change to Lisbon)');
-          locationHint.setAttribute('data-pt', '(Clique para mudar para Lisboa)');
-          console.log('리스본에서 포르토로 변경됨');
-        } else {
-          // 포르토에서 리스본으로 변경
-          currentLocation = 'lisbon';
-          // 지역명과 힌트의 data 속성 업데이트
-          locationText.setAttribute('data-ko', '리스본, 포르투갈');
-          locationText.setAttribute('data-en', 'Lisbon, Portugal');
-          locationText.setAttribute('data-pt', 'Lisboa, Portugal');
-          locationHint.setAttribute('data-ko', '(클릭하여 포르토로 변경)');
-          locationHint.setAttribute('data-en', '(Click to change to Porto)');
-          locationHint.setAttribute('data-pt', '(Clique para mudar para Porto)');
-          console.log('포르토에서 리스본으로 변경됨');
-        }
-        
-        // 현재 언어에 맞게 텍스트 업데이트
-        locationText.textContent = locationText.getAttribute(`data-${currentLanguage}`);
-        locationHint.textContent = locationHint.getAttribute(`data-${currentLanguage}`);
-        
-        // 날씨 데이터 업데이트
-        updateWeatherData();
-      };
-      
-      function updateWeatherData() {
-        console.log('updateWeatherData 함수 호출됨, 현재 지역:', currentLocation);
-        const weatherIcons = document.querySelectorAll('.weather-icon');
-        const tempHighs = document.querySelectorAll('.temp-high');
-        const tempLows = document.querySelectorAll('.temp-low');
-        const weatherDescs = document.querySelectorAll('.weather-desc');
-        
-        console.log('찾은 요소들:', {
-          weatherIcons: weatherIcons.length,
-          tempHighs: tempHighs.length,
-          tempLows: tempLows.length,
-          weatherDescs: weatherDescs.length
-        });
-        
-        weatherIcons.forEach((icon, index) => {
-          const newIcon = icon.getAttribute(`data-${currentLocation}`);
-          if (newIcon) {
-            icon.textContent = newIcon;
-            console.log(`날씨 아이콘 ${index + 1} 업데이트:`, newIcon);
-          } else {
-            console.warn(`날씨 아이콘 ${index + 1}에 data-${currentLocation} 속성이 없습니다`);
-          }
-        });
-        
-        tempHighs.forEach((temp, index) => {
-          const newTemp = temp.getAttribute(`data-${currentLocation}`);
-          if (newTemp) {
-            temp.textContent = newTemp;
-            console.log(`최고기온 ${index + 1} 업데이트:`, newTemp);
-          } else {
-            console.warn(`최고기온 ${index + 1}에 data-${currentLocation} 속성이 없습니다`);
-          }
-        });
-        
-        tempLows.forEach((temp, index) => {
-          const newTemp = temp.getAttribute(`data-${currentLocation}`);
-          if (newTemp) {
-            temp.textContent = newTemp;
-            console.log(`최저기온 ${index + 1} 업데이트:`, newTemp);
-          } else {
-            console.warn(`최저기온 ${index + 1}에 data-${currentLocation} 속성이 없습니다`);
-          }
-        });
-        
-        weatherDescs.forEach((desc, index) => {
-          // 언어와 지역을 모두 고려한 속성명 생성
-          const attributeName = `data-${currentLocation}-${currentLanguage}`;
-          let newDesc = desc.getAttribute(attributeName);
-          
-          // 해당 속성이 없으면 기본 지역 속성 사용
-          if (!newDesc) {
-            newDesc = desc.getAttribute(`data-${currentLocation}`);
-          }
-          
-          if (newDesc) {
-            desc.textContent = newDesc;
-            console.log(`날씨 설명 ${index + 1} 업데이트:`, newDesc, `(속성: ${attributeName})`);
-          } else {
-            console.warn(`날씨 설명 ${index + 1}에 ${attributeName} 또는 data-${currentLocation} 속성이 없습니다`);
+      // 로컬 스토리지에 언어 설정 저장
+      localStorage.setItem('selectedLanguage', lang);
+
+      // 날씨 데이터도 언어에 맞게 업데이트
+      updateWeatherData();
+
+      // 드롭다운 메뉴 닫기
+      const dropdown = document.querySelector('.dropdown-menu[aria-labelledby="languageDropdown"]');
+      if (dropdown) {
+        dropdown.classList.remove('show');
+      }
+      const dropdownToggle = document.getElementById('languageDropdown');
+      if (dropdownToggle) {
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    // 페이지 로드 시 저장된 언어 설정 불러오기
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedLanguage = localStorage.getItem('selectedLanguage');
+      if (savedLanguage && savedLanguage !== 'ko') {
+        changeLanguage(savedLanguage);
+      }
+
+      // 언어 드롭다운 수동 토글 기능 추가
+      const languageDropdown = document.getElementById('languageDropdown');
+      if (languageDropdown) {
+        languageDropdown.addEventListener('click', function(e) {
+          e.preventDefault();
+          const dropdownMenu = this.nextElementSibling;
+          if (dropdownMenu) {
+            dropdownMenu.classList.toggle('show');
+            this.setAttribute('aria-expanded', dropdownMenu.classList.contains('show'));
           }
         });
       }
-      
-      // 페이지 로드 후 요소 확인
-      setTimeout(function() {
-        const locationElement = document.getElementById('locationText');
-        if (locationElement) {
-          locationElement.style.cursor = 'pointer';
-          console.log('지역 클릭 이벤트 리스너 등록됨');
-        } else {
-          console.error('locationText 요소를 찾을 수 없습니다!');
+
+      // 다른 곳 클릭 시 드롭다운 닫기
+      document.addEventListener('click', function(e) {
+        const languageDropdown = document.getElementById('languageDropdown');
+        const dropdownMenu = document.querySelector('.dropdown-menu[aria-labelledby="languageDropdown"]');
+
+        if (languageDropdown && dropdownMenu &&
+                !languageDropdown.contains(e.target) &&
+                !dropdownMenu.contains(e.target)) {
+          dropdownMenu.classList.remove('show');
+          languageDropdown.setAttribute('aria-expanded', 'false');
         }
-      }, 100);
-    </script>
-  </th:block>
+      });
+    });
+
+    // 기존 슬라이더 JavaScript
+    let currentSlideIndex = 1;
+    const totalSlides = 4;
+
+    function showSlide(n) {
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots = document.querySelectorAll('.dot');
+      const currentSlideSpan = document.querySelector('.current-slide');
+
+      // 모든 슬라이드 숨기기
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+
+      // 슬라이드 인덱스 조정
+      if (n > totalSlides) currentSlideIndex = 1;
+      if (n < 1) currentSlideIndex = totalSlides;
+
+      // 현재 슬라이드 표시
+      slides[currentSlideIndex - 1].classList.add('active');
+      dots[currentSlideIndex - 1].classList.add('active');
+      currentSlideSpan.textContent = currentSlideIndex;
+    }
+
+    function changeSlide(direction) {
+      currentSlideIndex += direction;
+      showSlide(currentSlideIndex);
+    }
+
+    function currentSlide(n) {
+      currentSlideIndex = n;
+      showSlide(currentSlideIndex);
+    }
+
+    // 자동 슬라이드 (5초마다)
+    setInterval(() => {
+      currentSlideIndex++;
+      showSlide(currentSlideIndex);
+    }, 5000);
+
+    // 키보드 네비게이션
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft') {
+        changeSlide(-1);
+      } else if (e.key === 'ArrowRight') {
+        changeSlide(1);
+      }
+    });
+
+    // 날씨 지역 변경 기능
+    let currentLocation = 'lisbon'; // 기본값: 리스본
+
+    // 전역 함수로 선언 (onclick에서 호출 가능하도록)
+    window.changeWeatherLocation = function() {
+      console.log('changeWeatherLocation 함수 호출됨');
+      const locationText = document.getElementById('locationText');
+      const locationHint = document.querySelector('.location-change-hint');
+
+      if (!locationText) {
+        console.error('locationText 요소를 찾을 수 없습니다!');
+        return;
+      }
+
+      if (!locationHint) {
+        console.error('locationHint 요소를 찾을 수 없습니다!');
+        return;
+      }
+
+      console.log('현재 언어:', currentLanguage, '현재 지역:', currentLocation);
+
+      if (currentLocation === 'lisbon') {
+        // 리스본에서 포르토로 변경
+        currentLocation = 'porto';
+        // 지역명과 힌트의 data 속성 업데이트
+        locationText.setAttribute('data-ko', '포르토, 포르투갈');
+        locationText.setAttribute('data-en', 'Porto, Portugal');
+        locationText.setAttribute('data-pt', 'Porto, Portugal');
+        locationHint.setAttribute('data-ko', '(클릭하여 리스본으로 변경)');
+        locationHint.setAttribute('data-en', '(Click to change to Lisbon)');
+        locationHint.setAttribute('data-pt', '(Clique para mudar para Lisboa)');
+        console.log('리스본에서 포르토로 변경됨');
+      } else {
+        // 포르토에서 리스본으로 변경
+        currentLocation = 'lisbon';
+        // 지역명과 힌트의 data 속성 업데이트
+        locationText.setAttribute('data-ko', '리스본, 포르투갈');
+        locationText.setAttribute('data-en', 'Lisbon, Portugal');
+        locationText.setAttribute('data-pt', 'Lisboa, Portugal');
+        locationHint.setAttribute('data-ko', '(클릭하여 포르토로 변경)');
+        locationHint.setAttribute('data-en', '(Click to change to Porto)');
+        locationHint.setAttribute('data-pt', '(Clique para mudar para Porto)');
+        console.log('포르토에서 리스본으로 변경됨');
+      }
+
+      // 현재 언어에 맞게 텍스트 업데이트
+      locationText.textContent = locationText.getAttribute(`data-${currentLanguage}`);
+      locationHint.textContent = locationHint.getAttribute(`data-${currentLanguage}`);
+
+      // 날씨 데이터 업데이트
+      updateWeatherData();
+    };
+
+    function updateWeatherData() {
+      console.log('updateWeatherData 함수 호출됨, 현재 지역:', currentLocation);
+      const weatherIcons = document.querySelectorAll('.weather-icon');
+      const tempHighs = document.querySelectorAll('.temp-high');
+      const tempLows = document.querySelectorAll('.temp-low');
+      const weatherDescs = document.querySelectorAll('.weather-desc');
+
+      console.log('찾은 요소들:', {
+        weatherIcons: weatherIcons.length,
+        tempHighs: tempHighs.length,
+        tempLows: tempLows.length,
+        weatherDescs: weatherDescs.length
+      });
+
+      weatherIcons.forEach((icon, index) => {
+        const newIcon = icon.getAttribute(`data-${currentLocation}`);
+        if (newIcon) {
+          icon.textContent = newIcon;
+          console.log(`날씨 아이콘 ${index + 1} 업데이트:`, newIcon);
+        } else {
+          console.warn(`날씨 아이콘 ${index + 1}에 data-${currentLocation} 속성이 없습니다`);
+        }
+      });
+
+      tempHighs.forEach((temp, index) => {
+        const newTemp = temp.getAttribute(`data-${currentLocation}`);
+        if (newTemp) {
+          temp.textContent = newTemp;
+          console.log(`최고기온 ${index + 1} 업데이트:`, newTemp);
+        } else {
+          console.warn(`최고기온 ${index + 1}에 data-${currentLocation} 속성이 없습니다`);
+        }
+      });
+
+      tempLows.forEach((temp, index) => {
+        const newTemp = temp.getAttribute(`data-${currentLocation}`);
+        if (newTemp) {
+          temp.textContent = newTemp;
+          console.log(`최저기온 ${index + 1} 업데이트:`, newTemp);
+        } else {
+          console.warn(`최저기온 ${index + 1}에 data-${currentLocation} 속성이 없습니다`);
+        }
+      });
+
+      weatherDescs.forEach((desc, index) => {
+        // 언어와 지역을 모두 고려한 속성명 생성
+        const attributeName = `data-${currentLocation}-${currentLanguage}`;
+        let newDesc = desc.getAttribute(attributeName);
+
+        // 해당 속성이 없으면 기본 지역 속성 사용
+        if (!newDesc) {
+          newDesc = desc.getAttribute(`data-${currentLocation}`);
+        }
+
+        if (newDesc) {
+          desc.textContent = newDesc;
+          console.log(`날씨 설명 ${index + 1} 업데이트:`, newDesc, `(속성: ${attributeName})`);
+        } else {
+          console.warn(`날씨 설명 ${index + 1}에 ${attributeName} 또는 data-${currentLocation} 속성이 없습니다`);
+        }
+      });
+    }
+
+    // 페이지 로드 후 요소 확인
+    setTimeout(function() {
+      const locationElement = document.getElementById('locationText');
+      if (locationElement) {
+        locationElement.style.cursor = 'pointer';
+        console.log('지역 클릭 이벤트 리스너 등록됨');
+      } else {
+        console.error('locationText 요소를 찾을 수 없습니다!');
+      }
+    }, 100);
+  </script>
+</th:block>
 
 </body>
 </html>

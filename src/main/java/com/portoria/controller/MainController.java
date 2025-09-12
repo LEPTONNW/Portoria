@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @Log4j2
 public class MainController {
-
     @GetMapping("/")
     public String home() {
         return "main";
@@ -27,11 +26,6 @@ public class MainController {
         return "aiwine";
     }
 
-    @GetMapping("/video")
-    public String video() {
-
-        return "video";
-    }
-
+    //sdkpfjsdohfolsdhfjlas
 
 }
