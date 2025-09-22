@@ -26,5 +26,8 @@ public class MainController {
         return "aiwine";
     }
 
-    //asdashdhadksahdh
+    @GetMapping("/video")
+    public String video() {
+        return "video";
+    }
 }
