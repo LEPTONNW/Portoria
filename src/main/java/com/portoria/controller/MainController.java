@@ -25,7 +25,4 @@ public class MainController {
     public String aiwine() {
         return "aiwine";
     }
-
-    //sdkpfjsdohfolsdhfjlas
-
 }
